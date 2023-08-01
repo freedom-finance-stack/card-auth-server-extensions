@@ -18,6 +18,12 @@ public enum HSMCommandType {
         return this.name;
     }
 
+    /**
+     * Function to return specified {@link HSMCommandType} with respective name
+     *
+     * @param name of the HSM Command {@link String}
+     * @return {@link HSMCommandType}
+     */
     public static HSMCommandType fromStringType(String name) {
         for (HSMCommandType commandType : HSMCommandType.values()) {
             if (Objects.equals(commandType.name, name)) {
