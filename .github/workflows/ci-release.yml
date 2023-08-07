@@ -30,8 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Release Maven Central Repository
-        uses: actions/setup-java@v3
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'corretto'
@@ -39,7 +39,6 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Build(Clean, Compile, Test, and Package) with Maven
         run: mvn -B clean install
