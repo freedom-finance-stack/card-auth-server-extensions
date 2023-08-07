@@ -7,6 +7,22 @@ on:
 
 #Jobs
 jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    name: Cancel Previous Runs
+    if: always()
+    steps:
+      - uses: styfle/cancel-workflow-action@d57d93c3a8110b00c3a2c0b64b8516013c9fd4c9
+        if: github.ref != 'refs/heads/master'
+        name: cancel old workflows
+        id: cancel
+        with:
+          access_token: ${{ github.token }}
+      - if: github.ref == 'refs/heads/master'
+        name: Don't cancel old workflows
+        id: dont_cancel
+        run: |
+          echo "Don't cancel old workflow"
   publish:
     if: startsWith(github.ref, 'refs/tags/v') != true
     runs-on: ubuntu-latest
