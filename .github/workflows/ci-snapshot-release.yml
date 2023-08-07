@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-#Jobs
+#Jobs to run
 jobs:
   cancel:
     runs-on: ubuntu-latest
