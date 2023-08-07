@@ -24,8 +24,6 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
 
-      - name: Remove Snapshot
-
       - name: Build(Clean, Compile, Test, and Package) with Maven
         run: mvn -B clean install
 
