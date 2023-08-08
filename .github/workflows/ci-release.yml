@@ -41,12 +41,6 @@ jobs:
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Check GPG Version
-        run: gpg --version
-
-      - name: List GPG Keys
-        run: gpg --list-keys
-
       - name: Build(Clean, Compile, Test, and Package) with Maven
         run: mvn -B clean install
 
