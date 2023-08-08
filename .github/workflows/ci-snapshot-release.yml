@@ -1,49 +1,48 @@
-#name: Snapshot Release
-#
-#on:
-#  pull_request:
-#  push:
-#    branches:
-#      - master
-#
-##Jobs to run
-#jobs:
-#  cancel:
-#    runs-on: ubuntu-latest
-#    name: Cancel Previous Runs
-#    if: always()
-#    steps:
-#      - uses: styfle/cancel-workflow-action@d57d93c3a8110b00c3a2c0b64b8516013c9fd4c9
-#        if: github.ref != 'refs/heads/master'
-#        name: cancel old workflows
-#        id: cancel
-#        with:
-#          access_token: ${{ github.token }}
-#      - if: github.ref == 'refs/heads/master'
-#        name: Don't cancel old workflows
-#        id: dont_cancel
-#        run: |
-#          echo "Don't cancel old workflow"
-#  publish:
-#    if: startsWith(github.ref, 'refs/tags/v') != true
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Release Maven Central Repository
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: '11'
-#          distribution: 'corretto'
-#          server-id: ossrh
-#          server-username: MAVEN_USERNAME
-#          server-password: MAVEN_PASSWORD
-#
-#      - name: Build(Clean, Compile, Test, and Package) with Maven
-#        run: mvn -B clean install
-#
-#      - name: Publish package
-#        run: |
-#          mvn -B deploy
-#        env:
-#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+name: Snapshot Release
+
+on:
+  push:
+    branches:
+      - master
+
+#Jobs to run
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    name: Cancel Previous Runs
+    if: always()
+    steps:
+      - uses: styfle/cancel-workflow-action@d57d93c3a8110b00c3a2c0b64b8516013c9fd4c9
+        if: github.ref != 'refs/heads/master'
+        name: cancel old workflows
+        id: cancel
+        with:
+          access_token: ${{ github.token }}
+      - if: github.ref == 'refs/heads/master'
+        name: Don't cancel old workflows
+        id: dont_cancel
+        run: |
+          echo "Don't cancel old workflow"
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v') != true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Release Maven Central Repository
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'corretto'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+
+      - name: Build(Clean, Compile, Test, and Package) with Maven
+        run: mvn -B clean install
+
+      - name: Publish package
+        run: |
+          mvn -B deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
