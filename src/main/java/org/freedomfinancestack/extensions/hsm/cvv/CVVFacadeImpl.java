@@ -43,7 +43,7 @@ public class CVVFacadeImpl implements CVVFacade {
 
         String hsmResponse = hsmMessage.getHsmResponse();
 
-        if (StringUtils.isBlank(hsmResponse) || hsmResponse.length() < 4) {
+        if (StringUtils.isBlank(hsmResponse) || hsmResponse.length() < 3) {
             throw new Exception(
                     "HSM Response cannot be null or empty and hsmResponse cannot be less than 3"
                             + " digits");
