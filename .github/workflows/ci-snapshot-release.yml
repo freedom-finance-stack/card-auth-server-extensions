@@ -30,7 +30,7 @@ jobs:
         run: echo ${{ steps.project-version.outputs.version }}
 
   publish:
-    if: startsWith(github.ref, 'refs/tags/v') != true && contains(steps.project-version.outputs.version, 'SNAPSHOT')
+    if: startsWith(github.ref, 'refs/tags/v') != true && contains(needs.setup.steps.project-version.outputs.version, 'SNAPSHOT')
     runs-on: ubuntu-latest
     steps:
       - name: Build(Clean, Compile, Test, and Package) with Maven
