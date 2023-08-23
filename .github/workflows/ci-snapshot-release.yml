@@ -23,12 +23,13 @@ jobs:
           server-password: MAVEN_PASSWORD
 
       - name: Extract Maven project version
-        run: echo "version=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
+        #run: echo "version=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
+        run: echo ::set-env name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
         id: project-version
 
       - name: Show extracted Maven project version
-        run: echo "$GITHUB_OUTPUT" |
-          echo $version
+        run: echo $version |
+          echo "value:$version"
 
   publish:
     if: startsWith(github.ref, 'refs/tags/v') != true && contains(needs.setup.steps.project-version.outputs.version, 'SNAPSHOT')
