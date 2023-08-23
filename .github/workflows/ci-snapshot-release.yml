@@ -1,29 +1,14 @@
 name: Snapshot Release
 
 on:
+  pull_request:
   push:
     branches:
       - master
 
 #Jobs to run
 jobs:
-  cancel:
-    runs-on: ubuntu-latest
-    name: Cancel Previous Runs
-    if: always()
-    steps:
-      - uses: styfle/cancel-workflow-action@d57d93c3a8110b00c3a2c0b64b8516013c9fd4c9
-        if: github.ref != 'refs/heads/master'
-        name: cancel old workflows
-        id: cancel
-        with:
-          access_token: ${{ github.token }}
-      - if: github.ref == 'refs/heads/master'
-        name: Don't cancel old workflows
-        id: dont_cancel
-        run: |
-          echo "Don't cancel old workflow"
-  publish:
+  setup:
     if: startsWith(github.ref, 'refs/tags/v') != true
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +22,17 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
 
+      - name: Extract Maven project version
+        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        id: project-version
+
+      - name: Show extracted Maven project version
+        run: echo ${{ steps.project-version.outputs.version }}
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v') != true && contains(steps.project-version.outputs.version, 'SNAPSHOT')
+    runs-on: ubuntu-latest
+    steps:
       - name: Build(Clean, Compile, Test, and Package) with Maven
         run: mvn -B clean install
 
