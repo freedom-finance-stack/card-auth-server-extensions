@@ -2,6 +2,7 @@ package org.freedomfinancestack.extensions.hsm.noop;
 
 import org.freedomfinancestack.extensions.hsm.command.HSMCommand;
 import org.freedomfinancestack.extensions.hsm.command.enums.HSMCommandType;
+import org.freedomfinancestack.extensions.hsm.exception.HSMException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class NoOpHSMCommandImpl extends HSMCommand {
     }
 
     @Override
-    public byte[] sendRequest(byte[] requestMessage) throws Exception {
+    public byte[] sendRequest(byte[] requestMessage) throws HSMException {
         return new byte[0];
     }
 }
