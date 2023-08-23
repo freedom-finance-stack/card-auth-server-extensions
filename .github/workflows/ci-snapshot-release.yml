@@ -27,7 +27,7 @@ jobs:
         id: project-version
 
       - name: Show extracted Maven project version
-        run: echo $GITHUB_OUTPUT
+        run: echo "$GITHUB_OUTPUT"
 
   publish:
     if: startsWith(github.ref, 'refs/tags/v') != true && contains(needs.setup.steps.project-version.outputs.version, 'SNAPSHOT')
