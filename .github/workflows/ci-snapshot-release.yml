@@ -39,6 +39,9 @@ jobs:
       - name: Print Project Version
         run: echo ${{needs.setup.outputs.project-version}}
 
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Build(Clean, Compile, Test, and Package) with Maven
         run: mvn -B clean install
 
