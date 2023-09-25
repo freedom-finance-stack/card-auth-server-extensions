@@ -18,6 +18,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TaskSchedulerConfig {
+    // todo consumer wants to create multiple tasks schedulers , how do we give different configs as
+    // the properties is defined as task.scheduler
     private int corePoolSize;
     private int maxPoolSize;
     private long keepAliveTime;
