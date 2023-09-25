@@ -28,15 +28,12 @@ public class ScheduledExecutorTimerServiceImpl implements TimerService {
             String id, Runnable task, long delay, TimeUnit unit) throws TaskAlreadyExistException {
         // Check if a task with the same ID exists
         boolean taskExists = taskSchedulerWrapper.cancelTask(id);
-
         if (taskExists) {
             log.info("Task with ID {} already exists, cancelling and rescheduling.", id);
-            return taskSchedulerWrapper.scheduleTask(id, task, delay, unit);
         } else {
             log.info("Task with ID {} does not exist, scheduling new task.", id);
-            // Task with the same ID did not exist, schedule the new task.
-            return taskSchedulerWrapper.scheduleTask(id, task, delay, unit);
         }
+        return taskSchedulerWrapper.scheduleTask(id, task, delay, unit);
     }
 
     @Override
