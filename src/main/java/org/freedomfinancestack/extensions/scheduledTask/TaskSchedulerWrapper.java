@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 public class TaskSchedulerWrapper {
     private final ScheduledExecutorService executorService;
     private final ConcurrentHashMap<String, ScheduledFuture<?>> taskMap;
-    private final TaskSchedulerConfig taskSchedulerConfig;
 
     @Autowired
     public TaskSchedulerWrapper(TaskSchedulerConfig taskSchedulerConfig) {
@@ -33,7 +32,6 @@ public class TaskSchedulerWrapper {
                         taskSchedulerConfig.getKeepAliveTime(),
                         TimeUnit.MILLISECONDS);
         this.taskMap = new ConcurrentHashMap<>();
-        this.taskSchedulerConfig = taskSchedulerConfig;
     }
 
     /**
