@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.freedomfinancestack.extensions.hsm.command.HSMCommand;
 import org.freedomfinancestack.extensions.hsm.command.enums.HSMCommandType;
 import org.freedomfinancestack.extensions.hsm.command.factory.HSMCommandFactory;
+import org.freedomfinancestack.extensions.hsm.exception.HSMErrorCode;
+import org.freedomfinancestack.extensions.hsm.exception.HSMException;
 import org.freedomfinancestack.extensions.hsm.message.HSMMessage;
 import org.freedomfinancestack.extensions.hsm.message.HSMMessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import lombok.NonNull;
 
 @Service("cvvFacadeImpl")
 public class CVVFacadeImpl implements CVVFacade {
+
+    private static final int CVV_LENGTH = 3;
 
     private final HSMMessageValidator hsmMessageValidator;
 
@@ -34,7 +38,7 @@ public class CVVFacadeImpl implements CVVFacade {
     }
 
     @Override
-    public String generateCVV(@NonNull final HSMMessage hsmMessage) throws Exception {
+    public String generateCVV(@NonNull final HSMMessage hsmMessage) throws HSMException {
         hsmMessageValidator.validateHSMMessage(hsmMessage);
 
         HSMCommand hsmCommand = hsmCommandFactory.getHSMCommand(hsmCommandTypeEnabled);
@@ -43,10 +47,11 @@ public class CVVFacadeImpl implements CVVFacade {
 
         String hsmResponse = hsmMessage.getHsmResponse();
 
-        if (StringUtils.isBlank(hsmResponse) || hsmResponse.length() < 4) {
-            throw new Exception(
-                    "HSM Response cannot be null or empty and hsmResponse cannot be less than 3"
-                            + " digits");
+        if (StringUtils.isBlank(hsmResponse)) {
+            throw new HSMException(HSMErrorCode.CVV_GENERATED_BLANK);
+        }
+        if (hsmResponse.length() < CVV_LENGTH) {
+            throw new HSMException(HSMErrorCode.CVV_GENERATED_INCORRECT);
         }
         // returning first 3 digits which as CVV
         return hsmResponse.substring(0, 3);

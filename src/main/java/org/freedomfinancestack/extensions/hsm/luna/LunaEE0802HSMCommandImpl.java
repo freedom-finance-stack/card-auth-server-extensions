@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.freedomfinancestack.extensions.hsm.command.HSMCommand;
 import org.freedomfinancestack.extensions.hsm.command.enums.HSMCommandType;
+import org.freedomfinancestack.extensions.hsm.exception.HSMException;
 import org.freedomfinancestack.extensions.hsm.luna.config.HSMInitialisationConfig;
 import org.freedomfinancestack.extensions.hsm.luna.gateway.HSMGateway;
 import org.freedomfinancestack.extensions.hsm.luna.gateway.HSMGatewayCorrelationStrategy;
@@ -77,7 +78,7 @@ public class LunaEE0802HSMCommandImpl extends HSMCommand {
     }
 
     @Override
-    public byte[] sendRequest(byte[] requestMessage) throws Exception {
+    public byte[] sendRequest(byte[] requestMessage) throws HSMException {
         // Create HSMTransactionMessage from requestMessage
         HSMTransactionMessage hsmTransactionMessage = createHSMTransactionMessage(requestMessage);
 
@@ -96,14 +97,17 @@ public class LunaEE0802HSMCommandImpl extends HSMCommand {
 
     @Override
     public void processResponse(byte[] responseMessage) {
-        // Remove Header from Luna HSM Response
-        byte[] responseMessageBytes = new byte[responseMessage.length - 6];
-        System.arraycopy(responseMessage, 6, responseMessageBytes, 0, responseMessageBytes.length);
-
-        String outputData = HexUtil.hexValue(responseMessageBytes, 0, responseMessageBytes.length);
         String hsmResponse = null;
         try {
+            // Remove Header from Luna HSM Response
+            byte[] responseMessageBytes = new byte[responseMessage.length - 6];
+            System.arraycopy(
+                    responseMessage, 6, responseMessageBytes, 0, responseMessageBytes.length);
+
+            String outputData =
+                    HexUtil.hexValue(responseMessageBytes, 0, responseMessageBytes.length);
             String responseCode = outputData.substring(6, 8);
+
             if (responseCode.equals(HSM_SUCCESSFUL_RESPONSE)) {
                 // todo - check if the HSM Response retrieved is correct.
                 hsmResponse = outputData.substring(8);
@@ -115,11 +119,11 @@ public class LunaEE0802HSMCommandImpl extends HSMCommand {
                         "processResponse() Cvv generation is failed with response code: {} ",
                         responseCode);
             }
-        } catch (Exception exp) {
+        } catch (Exception exception) {
             hsmMessage.setHsmResponse(hsmResponse);
             log.error(
                     "processResponse() Cvv generation is failed with exception "
-                            + HexUtil.getStackTrace(exp));
+                            + HexUtil.getStackTrace(exception));
         }
     }
 

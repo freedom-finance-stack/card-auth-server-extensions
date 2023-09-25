@@ -1,5 +1,6 @@
 package org.freedomfinancestack.extensions.hsm.luna.gateway.impl;
 
+import org.freedomfinancestack.extensions.hsm.exception.HSMException;
 import org.freedomfinancestack.extensions.hsm.luna.gateway.HSMGateway;
 import org.freedomfinancestack.extensions.hsm.luna.gateway.HSMGatewayAsyncReply;
 import org.freedomfinancestack.extensions.hsm.luna.gateway.HSMGatewayService;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import static org.freedomfinancestack.extensions.hsm.exception.HSMErrorCode.HSM_FETCH_RESPONSE_ERROR;
+import static org.freedomfinancestack.extensions.hsm.exception.HSMErrorCode.HSM_SEND_REQUEST_ERROR;
 import static org.freedomfinancestack.extensions.hsm.luna.utils.LunaConstants.setHSMEchoTime;
 
 @Slf4j
@@ -23,7 +26,7 @@ public class HSMGatewayServiceImpl implements HSMGatewayService<HSMGateway, HSMT
 
     @Override
     public void sendRequest(HSMGateway gatewayHandler, HSMTransactionMessage message)
-            throws Exception {
+            throws HSMException {
 
         try {
 
@@ -37,21 +40,21 @@ public class HSMGatewayServiceImpl implements HSMGatewayService<HSMGateway, HSMT
             }
 
         } catch (Exception e) {
-            log.error("Exception in sending transaction to HSM", e);
-            throw new Exception("Exception in sending transaction to HSM");
+            log.error("sendRequest() Exception in sending transaction to HSM", e);
+            throw new HSMException(HSM_SEND_REQUEST_ERROR, e);
         }
     }
 
     @Override
-    public byte[] fetchResponse(Object correlationKey) throws Exception {
+    public byte[] fetchResponse(Object correlationKey) throws HSMException {
         byte[] byteArray = null;
 
         Message<?> message = hsmgatewayAsyncReply.get(correlationKey);
         if (null != message) {
             byteArray = (byte[]) message.getPayload();
         } else {
-            log.error("Exception in receiving transaction");
-            throw new Exception("Exception in receiving transaction from HSM");
+            log.error("fetchResponse() Exception in receiving transaction");
+            throw new HSMException(HSM_FETCH_RESPONSE_ERROR);
         }
         return byteArray;
     }
