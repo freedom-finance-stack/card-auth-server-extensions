@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    commands:
+      - cd ./my-app
+      - echo Installing npm packages...
+      - npm install       
+  build:
+    commands:
+      - echo run tests...
+      - CI=true npm run test -- --reporters=jest-junit
+reports:
+  jest_reports:
+    files:
+      - junit.xml
+    file-format: JUNITXML
+    base-directory: my-app
