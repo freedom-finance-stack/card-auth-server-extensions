@@ -1,4 +1,4 @@
-package org.freedomfinancestack.extensions.ext_modules.security;
+package org.freedomfinancestack.extensions.externallibs.security;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +9,7 @@ public class SecurityModuleAWS {
 
     public boolean verifyRequest(HttpServletRequest httpServletRequest) {
         log.info("httpServletRequest: {}", httpServletRequest);
-        /** Business Logic written by AWS team or RPC call to AWS Server */
+        /** Custom Business Logic can be implemented here. */
         return true;
     }
 }
