@@ -1,0 +1,3707 @@
+{
+ "Description": "Blueprints tracking (qs-1s1r465hk)",
+ "Resources": {
+  "eksblueprintvpc63DECCD0": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/Resource"
+   }
+  },
+  "eksblueprintvpcPublicSubnet1Subnet61827719": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.0.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1/Subnet"
+   }
+  },
+  "eksblueprintvpcPublicSubnet1RouteTable21A7C017": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPublicSubnet1RouteTable21A7C017"
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPublicSubnet1Subnet61827719"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "eksblueprintvpcIGWA4E10818"
+    },
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPublicSubnet1RouteTable21A7C017"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "eksblueprintvpcPublicSubnet1EIP5CAED24C": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1/EIP"
+   }
+  },
+  "eksblueprintvpcPublicSubnet1NATGateway79BA13C2": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPublicSubnet1Subnet61827719"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "eksblueprintvpcPublicSubnet2Subnet9B247C15": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.32.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2/Subnet"
+   }
+  },
+  "eksblueprintvpcPublicSubnet2RouteTable785335C6": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPublicSubnet2RouteTable785335C6"
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPublicSubnet2Subnet9B247C15"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "eksblueprintvpcIGWA4E10818"
+    },
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPublicSubnet2RouteTable785335C6"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "eksblueprintvpcPublicSubnet2EIP35FA39B6": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2/EIP"
+   }
+  },
+  "eksblueprintvpcPublicSubnet2NATGateway99251FB0": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPublicSubnet2Subnet9B247C15"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet2/NATGateway"
+   }
+  },
+  "eksblueprintvpcPublicSubnet3Subnet2D6C336B": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1c",
+    "CidrBlock": "10.0.64.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3/Subnet"
+   }
+  },
+  "eksblueprintvpcPublicSubnet3RouteTable00478BE2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3/RouteTable"
+   }
+  },
+  "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPublicSubnet3RouteTable00478BE2"
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPublicSubnet3Subnet2D6C336B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3/RouteTableAssociation"
+   }
+  },
+  "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "eksblueprintvpcIGWA4E10818"
+    },
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPublicSubnet3RouteTable00478BE2"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3/DefaultRoute"
+   }
+  },
+  "eksblueprintvpcPublicSubnet3EIPB564A429": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3/EIP"
+   }
+  },
+  "eksblueprintvpcPublicSubnet3NATGateway9C071715": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "eksblueprintvpcPublicSubnet3EIPB564A429",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPublicSubnet3Subnet2D6C336B"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PublicSubnet3/NATGateway"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet1SubnetDA0563DD": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.96.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet1RouteTable09B6B428": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPrivateSubnet1RouteTable09B6B428"
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPrivateSubnet1SubnetDA0563DD"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "eksblueprintvpcPublicSubnet1NATGateway79BA13C2"
+    },
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPrivateSubnet1RouteTable09B6B428"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet2SubnetCD1F2410": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.128.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED"
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPrivateSubnet2SubnetCD1F2410"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "eksblueprintvpcPublicSubnet2NATGateway99251FB0"
+    },
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet3Subnet6BCB118E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1c",
+    "CidrBlock": "10.0.160.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/Subnet"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet3RouteTable150AC721": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/RouteTable"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPrivateSubnet3RouteTable150AC721"
+    },
+    "SubnetId": {
+     "Ref": "eksblueprintvpcPrivateSubnet3Subnet6BCB118E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/RouteTableAssociation"
+   }
+  },
+  "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "eksblueprintvpcPublicSubnet3NATGateway9C071715"
+    },
+    "RouteTableId": {
+     "Ref": "eksblueprintvpcPrivateSubnet3RouteTable150AC721"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/DefaultRoute"
+   }
+  },
+  "eksblueprintvpcIGWA4E10818": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "eks-blueprint/eks-blueprint-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/IGW"
+   }
+  },
+  "eksblueprintvpcVPCGW9071F94F": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "eksblueprintvpcIGWA4E10818"
+    },
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/VPCGW"
+   }
+  },
+  "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "eksblueprintvpc63DECCD0",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": "412681425637"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-vpc/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:ec2:us-east-1:412681425637:security-group/",
+             {
+              "Fn::GetAtt": [
+               "eksblueprintvpc63DECCD0",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-412681425637-us-east-1",
+     "S3Key": "e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386",
+    "aws:asset:property": "Code"
+   }
+  },
+  "eksblueprintkmskeyAF19CF0B": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "Description": "Key for EKS Cluster 'eks-blueprint'",
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:aws:iam::412681425637:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-kms-key/Resource"
+   }
+  },
+  "eksblueprintAccessRoleBA6A9CB7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:aws:iam::412681425637:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint-AccessRole/Resource"
+   }
+  },
+  "kubectllayer2595F4425A": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": "cdk-hnb659fds-assets-412681425637-us-east-1",
+     "S3Key": "ebc48a9a74e277f463f78c5a0b3bcf489a891efe25ece75b5b439b9e89bee4ac.zip"
+    },
+    "Description": "/opt/kubectl/kubectl 1.25; /opt/helm/helm 3.11",
+    "LicenseInfo": "Apache-2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/kubectllayer25/Resource",
+    "aws:asset:path": "asset.ebc48a9a74e277f463f78c5a0b3bcf489a891efe25ece75b5b439b9e89bee4ac.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Content"
+   }
+  },
+  "eksblueprintKubectlHandlerRole132A5996": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::If": [
+       "eksblueprintHasEcrPublicBE9FE450",
+       {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
+         ]
+        ]
+       },
+       {
+        "Ref": "AWS::NoValue"
+       }
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/KubectlHandlerRole/Resource"
+   }
+  },
+  "eksblueprintKubectlHandlerRoleDefaultPolicyE312FA68": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "eks:DescribeCluster",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "eksblueprint5FFC002D",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "eksblueprintCreationRoleF5DD1341",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksblueprintKubectlHandlerRoleDefaultPolicyE312FA68",
+    "Roles": [
+     {
+      "Ref": "eksblueprintKubectlHandlerRole132A5996"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/KubectlHandlerRole/DefaultPolicy/Resource"
+   }
+  },
+  "eksblueprintRoleAA7BB8F6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSClusterPolicy"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/Role/Resource"
+   }
+  },
+  "eksblueprintControlPlaneSecurityGroup13BCED08": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EKS Control Plane Security Group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "eksblueprintvpc63DECCD0"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/ControlPlaneSecurityGroup/Resource"
+   }
+  },
+  "eksblueprintCreationRoleF5DD1341": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": [
+         {
+          "Fn::GetAtt": [
+           "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+           "Outputs.eksblueprintawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole7509B4A2Arn"
+          ]
+         },
+         {
+          "Fn::GetAtt": [
+           "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+           "Outputs.eksblueprintawscdkawseksClusterResourceProviderOnEventHandlerServiceRole33AAF146Arn"
+          ]
+         },
+         {
+          "Fn::GetAtt": [
+           "eksblueprintKubectlHandlerRole132A5996",
+           "Arn"
+          ]
+         }
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/Resource/CreationRole/Resource"
+   }
+  },
+  "eksblueprintCreationRoleDefaultPolicy7A8D158B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "eksblueprintRoleAA7BB8F6",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "eks:CreateCluster",
+        "eks:CreateFargateProfile",
+        "eks:DeleteCluster",
+        "eks:DescribeCluster",
+        "eks:DescribeUpdate",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:UpdateClusterConfig",
+        "eks:UpdateClusterVersion"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:eks:us-east-1:412681425637:cluster/eks-blueprint",
+        "arn:aws:eks:us-east-1:412681425637:cluster/eks-blueprint/*"
+       ]
+      },
+      {
+       "Action": [
+        "eks:DeleteFargateProfile",
+        "eks:DescribeFargateProfile"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:eks:us-east-1:412681425637:fargateprofile/eks-blueprint/*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
+        "iam:GetRole",
+        "iam:listAttachedRolePolicies"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "eksblueprintkmskeyAF19CF0B",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksblueprintCreationRoleDefaultPolicy7A8D158B",
+    "Roles": [
+     {
+      "Ref": "eksblueprintCreationRoleF5DD1341"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/Resource/CreationRole/DefaultPolicy/Resource"
+   }
+  },
+  "eksblueprint5FFC002D": {
+   "Type": "Custom::AWSCDK-EKS-Cluster",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+      "Outputs.eksblueprintawscdkawseksClusterResourceProviderframeworkonEvent103F7336Arn"
+     ]
+    },
+    "Config": {
+     "name": "eks-blueprint",
+     "version": "1.25",
+     "roleArn": {
+      "Fn::GetAtt": [
+       "eksblueprintRoleAA7BB8F6",
+       "Arn"
+      ]
+     },
+     "encryptionConfig": [
+      {
+       "provider": {
+        "keyArn": {
+         "Fn::GetAtt": [
+          "eksblueprintkmskeyAF19CF0B",
+          "Arn"
+         ]
+        }
+       },
+       "resources": [
+        "secrets"
+       ]
+      }
+     ],
+     "kubernetesNetworkConfig": {
+      "ipFamily": "ipv4"
+     },
+     "resourcesVpcConfig": {
+      "subnetIds": [
+       {
+        "Ref": "eksblueprintvpcPublicSubnet1Subnet61827719"
+       },
+       {
+        "Ref": "eksblueprintvpcPublicSubnet2Subnet9B247C15"
+       },
+       {
+        "Ref": "eksblueprintvpcPublicSubnet3Subnet2D6C336B"
+       },
+       {
+        "Ref": "eksblueprintvpcPrivateSubnet1SubnetDA0563DD"
+       },
+       {
+        "Ref": "eksblueprintvpcPrivateSubnet2SubnetCD1F2410"
+       },
+       {
+        "Ref": "eksblueprintvpcPrivateSubnet3Subnet6BCB118E"
+       }
+      ],
+      "securityGroupIds": [
+       {
+        "Fn::GetAtt": [
+         "eksblueprintControlPlaneSecurityGroup13BCED08",
+         "GroupId"
+        ]
+       }
+      ],
+      "endpointPublicAccess": true,
+      "endpointPrivateAccess": true
+     }
+    },
+    "AssumeRoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "AttributesRevision": 2
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintCreationRoleDefaultPolicy7A8D158B",
+    "eksblueprintCreationRoleF5DD1341"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/Resource/Resource/Default"
+   }
+  },
+  "eksblueprintKubectlReadyBarrier554CE297": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "aws:cdk:eks:kubectl-ready"
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintCreationRoleDefaultPolicy7A8D158B",
+    "eksblueprintCreationRoleF5DD1341",
+    "eksblueprint5FFC002D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/KubectlReadyBarrier"
+   }
+  },
+  "eksblueprintAwsAuthmanifest443E8097": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"aws-auth\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c80a08f34ed7899415c119f2fdfb26c213c91fb28c\":\"\"}},\"data\":{\"mapRoles\":\"[{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "eksblueprintAccessRoleBA6A9CB7",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "eksblueprintAccessRoleBA6A9CB7",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"groups\\\":[\\\"system:masters\\\"]},{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "eksblueprintNodegroupeksblueprintngngNodeGroupRole4B4E34D4",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]}]\",\"mapUsers\":\"[]\",\"mapAccounts\":\"[]\"}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c80a08f34ed7899415c119f2fdfb26c213c91fb28c",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/AwsAuth/manifest/Resource/Default"
+   }
+  },
+  "eksblueprintNodegroupeksblueprintngngNodeGroupRole4B4E34D4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "k8s.io/cluster-autoscaler/eks-blueprint/clusterName",
+      "Value": "owned"
+     },
+     {
+      "Key": "k8s.io/cluster-autoscaler/enabled",
+      "Value": "true"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/Nodegroupeks-blueprint-ng-ng/NodeGroupRole/Resource"
+   }
+  },
+  "eksblueprintNodegroupeksblueprintngng750FE868": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "AmiType": "AL2_x86_64",
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "m5.large"
+    ],
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "eksblueprintNodegroupeksblueprintngngNodeGroupRole4B4E34D4",
+      "Arn"
+     ]
+    },
+    "NodegroupName": "eks-blueprint-ng",
+    "ScalingConfig": {
+     "DesiredSize": 1,
+     "MaxSize": 3,
+     "MinSize": 1
+    },
+    "Subnets": [
+     {
+      "Ref": "eksblueprintvpcPrivateSubnet1SubnetDA0563DD"
+     },
+     {
+      "Ref": "eksblueprintvpcPrivateSubnet2SubnetCD1F2410"
+     },
+     {
+      "Ref": "eksblueprintvpcPrivateSubnet3Subnet6BCB118E"
+     }
+    ],
+    "Tags": {
+     "k8s.io/cluster-autoscaler/eks-blueprint/clusterName": "owned",
+     "k8s.io/cluster-autoscaler/enabled": "true"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/Nodegroupeks-blueprint-ng-ng/Resource"
+   }
+  },
+  "eksblueprintargocdserverConditionJsonAC3C7A3E": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:argocd:argocd-server\"}"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "argocdnamespacestruct05557081",
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/argo-cd-server/ConditionJson/Resource/Default"
+   }
+  },
+  "eksblueprintargocdserverRoleDE25B2FB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "eksblueprintargocdserverConditionJsonAC3C7A3E",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "argocdnamespacestruct05557081",
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/argo-cd-server/Role/Resource"
+   }
+  },
+  "eksblueprintargocdservermanifestargocdserverServiceAccountResource13CB795F": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"argocd-server\",\"namespace\":\"argocd\",\"labels\":{\"aws.cdk.eks/prune-c8ba2443168b9ed5f108a1d4786653aee66ee49893\":\"\",\"app.kubernetes.io/name\":\"argocd-server\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "eksblueprintargocdserverRoleDE25B2FB",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8ba2443168b9ed5f108a1d4786653aee66ee49893"
+   },
+   "DependsOn": [
+    "argocdnamespacestruct05557081",
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/argo-cd-server/manifest-argo-cd-serverServiceAccountResource/Resource/Default"
+   }
+  },
+  "eksblueprintOpenIdConnectProvider44243F0A": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
+      "Arn"
+     ]
+    },
+    "ClientIDList": [
+     "sts.amazonaws.com"
+    ],
+    "Url": {
+     "Fn::GetAtt": [
+      "eksblueprint5FFC002D",
+      "OpenIdConnectIssuerUrl"
+     ]
+    },
+    "CodeHash": "48e9fd6cee1d2c5f41da5c382b67d28876e6930ade034bffcfe0739f878fec68"
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/OpenIdConnectProvider/Resource/Default"
+   }
+  },
+  "eksblueprintchartargocdaddon897949CA": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-argocd",
+    "Chart": "argo-cd",
+    "Version": "5.41.1",
+    "Values": "{\"server\":{\"serviceAccount\":{\"create\":false}}}",
+    "Namespace": "argocd",
+    "Repository": "https://argoproj.github.io/argo-helm",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintargocdserverConditionJsonAC3C7A3E",
+    "eksblueprintargocdservermanifestargocdserverServiceAccountResource13CB795F",
+    "eksblueprintargocdserverRoleDE25B2FB",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/chart-argocd-addon/Resource/Default"
+   }
+  },
+  "eksblueprintchartcalicooperatorA41F9792": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "Release": "bp-addon-calico-operator",
+    "Chart": "tigera-operator",
+    "Version": "v3.26.1",
+    "Values": "{}",
+    "Namespace": "calico-operator",
+    "Repository": "https://projectcalico.docs.tigera.io/charts",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/chart-calico-operator/Resource/Default"
+   }
+  },
+  "eksblueprintchartmetricsserverC18F534D": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-metrics-server",
+    "Chart": "metrics-server",
+    "Version": "3.10.0",
+    "Values": "{\"chart\":\"metrics-server\",\"repository\":\"https://kubernetes-sigs.github.io/metrics-server\",\"version\":\"3.10.0\",\"release\":\"blueprints-addon-metrics-server\",\"name\":\"metrics-server\",\"namespace\":\"kube-system\",\"createNamespace\":false}",
+    "Namespace": "kube-system",
+    "Repository": "https://kubernetes-sigs.github.io/metrics-server",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/chart-metrics-server/Resource/Default"
+   }
+  },
+  "eksblueprintblueprintsaddonclusterautoscalermanagedpolicyCC256345": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "Description": "",
+    "Path": "/",
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:DescribeAutoScalingInstances",
+        "autoscaling:DescribeLaunchConfigurations",
+        "autoscaling:DescribeTags",
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:TerminateInstanceInAutoScalingGroup",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeLaunchTemplateVersions",
+        "eks:DescribeNodegroup"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-managed-policy/Resource"
+   }
+  },
+  "eksblueprintblueprintsaddonclusterautoscalersaConditionJsonD8DC27B7": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:kube-system:blueprints-addon-cluster-autoscaler\"}"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-sa/ConditionJson/Resource/Default"
+   }
+  },
+  "eksblueprintblueprintsaddonclusterautoscalersaRoleE623151C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "eksblueprintblueprintsaddonclusterautoscalersaConditionJsonD8DC27B7",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Ref": "eksblueprintblueprintsaddonclusterautoscalermanagedpolicyCC256345"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-sa/Role/Resource"
+   }
+  },
+  "eksblueprintblueprintsaddonclusterautoscalersamanifestblueprintsaddonclusterautoscalersaServiceAccountResource72D82586": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"blueprints-addon-cluster-autoscaler\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c8d0239316225d3de7a7e67fd7634725659913ca01\":\"\",\"app.kubernetes.io/name\":\"blueprints-addon-cluster-autoscaler\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "eksblueprintblueprintsaddonclusterautoscalersaRoleE623151C",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8d0239316225d3de7a7e67fd7634725659913ca01"
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-sa/manifest-blueprints-addon-cluster-autoscaler-saServiceAccountResource/Resource/Default"
+   }
+  },
+  "eksblueprintchartclusterautoscaler72A0AB35": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-cluster-autoscaler",
+    "Chart": "cluster-autoscaler",
+    "Version": "9.29.0",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"cloudProvider\":\"aws\",\"autoDiscovery\":{\"clusterName\":\"",
+       {
+        "Ref": "eksblueprint5FFC002D"
+       },
+       "\"},\"awsRegion\":\"us-east-1\",\"rbac\":{\"serviceAccount\":{\"create\":false,\"name\":\"blueprints-addon-cluster-autoscaler\"}}}"
+      ]
+     ]
+    },
+    "Namespace": "kube-system",
+    "Repository": "https://kubernetes.github.io/autoscaler"
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintblueprintsaddonclusterautoscalersaConditionJsonD8DC27B7",
+    "eksblueprintblueprintsaddonclusterautoscalersamanifestblueprintsaddonclusterautoscalersaServiceAccountResource72D82586",
+    "eksblueprintblueprintsaddonclusterautoscalersaRoleE623151C",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/chart-cluster-autoscaler/Resource/Default"
+   }
+  },
+  "eksblueprintawsloadbalancercontrollerConditionJsonFC89052E": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:kube-system:aws-load-balancer-controller\"}"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/aws-load-balancer-controller/ConditionJson/Resource/Default"
+   }
+  },
+  "eksblueprintawsloadbalancercontrollerRole1AAA4349": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "eksblueprintawsloadbalancercontrollerConditionJsonFC89052E",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "eksblueprintOpenIdConnectProvider44243F0A"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/aws-load-balancer-controller/Role/Resource"
+   }
+  },
+  "eksblueprintawsloadbalancercontrollerRoleDefaultPolicyCEEA8F9D": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Condition": {
+        "StringEquals": {
+         "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "acm:DescribeCertificate",
+        "acm:ListCertificates",
+        "cognito-idp:DescribeUserPoolClient",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateSecurityGroup",
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeCoipPools",
+        "ec2:DescribeInstances",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeTags",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeVpcs",
+        "ec2:GetCoipPoolUsage",
+        "ec2:RevokeSecurityGroupIngress",
+        "elasticloadbalancing:AddListenerCertificates",
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:DeleteRule",
+        "elasticloadbalancing:DescribeListenerCertificates",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeSSLPolicies",
+        "elasticloadbalancing:DescribeTags",
+        "elasticloadbalancing:DescribeTargetGroupAttributes",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:ModifyRule",
+        "elasticloadbalancing:RemoveListenerCertificates",
+        "elasticloadbalancing:SetWebAcl",
+        "iam:GetServerCertificate",
+        "iam:ListServerCertificates",
+        "shield:CreateProtection",
+        "shield:DeleteProtection",
+        "shield:DescribeProtection",
+        "shield:GetSubscriptionState",
+        "waf-regional:AssociateWebACL",
+        "waf-regional:DisassociateWebACL",
+        "waf-regional:GetWebACL",
+        "waf-regional:GetWebACLForResource",
+        "wafv2:AssociateWebACL",
+        "wafv2:DisassociateWebACL",
+        "wafv2:GetWebACL",
+        "wafv2:GetWebACLForResource"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ec2:CreateTags",
+       "Condition": {
+        "StringEquals": {
+         "ec2:CreateAction": "CreateSecurityGroup"
+        },
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:aws:ec2:*:*:security-group/*"
+      },
+      {
+       "Action": [
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:aws:ec2:*:*:security-group/*"
+      },
+      {
+       "Action": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:DeleteSecurityGroup",
+        "ec2:RevokeSecurityGroupIngress",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:DeleteTargetGroup",
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetSubnets"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateTargetGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*",
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+        "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:elasticloadbalancing:*:*:listener-rule/app/*/*/*",
+        "arn:aws:elasticloadbalancing:*:*:listener-rule/net/*/*/*",
+        "arn:aws:elasticloadbalancing:*:*:listener/app/*/*/*",
+        "arn:aws:elasticloadbalancing:*:*:listener/net/*/*/*"
+       ]
+      },
+      {
+       "Action": "elasticloadbalancing:AddTags",
+       "Condition": {
+        "StringEquals": {
+         "elasticloadbalancing:CreateAction": [
+          "CreateTargetGroup",
+          "CreateLoadBalancer"
+         ]
+        },
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*",
+        "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+        "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:DeregisterTargets",
+        "elasticloadbalancing:RegisterTargets"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "eksblueprintawsloadbalancercontrollerRoleDefaultPolicyCEEA8F9D",
+    "Roles": [
+     {
+      "Ref": "eksblueprintawsloadbalancercontrollerRole1AAA4349"
+     }
+    ]
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/aws-load-balancer-controller/Role/DefaultPolicy/Resource"
+   }
+  },
+  "eksblueprintawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource32DFFE2C": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"aws-load-balancer-controller\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c86770b6bbdd03833430dbc8ab41ac9f889f843afa\":\"\",\"app.kubernetes.io/name\":\"aws-load-balancer-controller\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "eksblueprintawsloadbalancercontrollerRole1AAA4349",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c86770b6bbdd03833430dbc8ab41ac9f889f843afa"
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default"
+   }
+  },
+  "eksblueprintchartawsloadbalancercontrollerDA7B8D91": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "Release": "aws-load-balancer-controller",
+    "Chart": "aws-load-balancer-controller",
+    "Version": "1.5.5",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"clusterName\":\"",
+       {
+        "Ref": "eksblueprint5FFC002D"
+       },
+       "\",\"serviceAccount\":{\"create\":false,\"name\":\"aws-load-balancer-controller\"},\"enableShield\":false,\"enableWaf\":false,\"enableWafv2\":false,\"createIngressClassResource\":true,\"ingressClass\":\"alb\",\"enableServiceMutatorWebhook\":false,\"region\":\"us-east-1\",\"image\":{\"repository\":\"602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-load-balancer-controller\"},\"vpcId\":\"",
+       {
+        "Ref": "eksblueprintvpc63DECCD0"
+       },
+       "\"}"
+      ]
+     ]
+    },
+    "Namespace": "kube-system",
+    "Repository": "https://aws.github.io/eks-charts",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "eksblueprintvpcIGWA4E10818",
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTable09B6B428",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet1SubnetDA0563DD",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet2SubnetCD1F2410",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTable150AC721",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintvpcPrivateSubnet3Subnet6BCB118E",
+    "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97",
+    "eksblueprintvpcPublicSubnet1EIP5CAED24C",
+    "eksblueprintvpcPublicSubnet1NATGateway79BA13C2",
+    "eksblueprintvpcPublicSubnet1RouteTable21A7C017",
+    "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF",
+    "eksblueprintvpcPublicSubnet1Subnet61827719",
+    "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16",
+    "eksblueprintvpcPublicSubnet2EIP35FA39B6",
+    "eksblueprintvpcPublicSubnet2NATGateway99251FB0",
+    "eksblueprintvpcPublicSubnet2RouteTable785335C6",
+    "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246",
+    "eksblueprintvpcPublicSubnet2Subnet9B247C15",
+    "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E",
+    "eksblueprintvpcPublicSubnet3EIPB564A429",
+    "eksblueprintvpcPublicSubnet3NATGateway9C071715",
+    "eksblueprintvpcPublicSubnet3RouteTable00478BE2",
+    "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8",
+    "eksblueprintvpcPublicSubnet3Subnet2D6C336B",
+    "eksblueprintvpc63DECCD0",
+    "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43",
+    "eksblueprintvpcVPCGW9071F94F",
+    "eksblueprintawsloadbalancercontrollerConditionJsonFC89052E",
+    "eksblueprintawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource32DFFE2C",
+    "eksblueprintawsloadbalancercontrollerRoleDefaultPolicyCEEA8F9D",
+    "eksblueprintawsloadbalancercontrollerRole1AAA4349",
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/eks-blueprint/chart-aws-load-balancer-controller/Resource/Default"
+   }
+  },
+  "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.us-east-1.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-412681425637-us-east-1/af4252ce1eaf1a9f47eb52b47192e8a676101988ba862cae18596e2106ca519c.json"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
+    "aws:asset:path": "eksblueprintawscdkawseksClusterResourceProvider2D8CA0A8.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "Parameters": {
+     "referencetoeksblueprintkubectllayer2508C72290Ref": {
+      "Ref": "kubectllayer2595F4425A"
+     },
+     "referencetoeksblueprintKubectlHandlerRole75C1BC6FArn": {
+      "Fn::GetAtt": [
+       "eksblueprintKubectlHandlerRole132A5996",
+       "Arn"
+      ]
+     },
+     "referencetoeksblueprinteksblueprintvpcPrivateSubnet1Subnet5469AC37Ref": {
+      "Ref": "eksblueprintvpcPrivateSubnet1SubnetDA0563DD"
+     },
+     "referencetoeksblueprinteksblueprintvpcPrivateSubnet2Subnet80B7C638Ref": {
+      "Ref": "eksblueprintvpcPrivateSubnet2SubnetCD1F2410"
+     },
+     "referencetoeksblueprinteksblueprintvpcPrivateSubnet3Subnet70983311Ref": {
+      "Ref": "eksblueprintvpcPrivateSubnet3Subnet6BCB118E"
+     },
+     "referencetoeksblueprint4AF8E185ClusterSecurityGroupId": {
+      "Fn::GetAtt": [
+       "eksblueprint5FFC002D",
+       "ClusterSecurityGroupId"
+      ]
+     }
+    },
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.us-east-1.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-412681425637-us-east-1/01911151f8738113e7cbf15df0fa683012bcd1ae7d76bb96c6cbe421c31262fc.json"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450",
+    "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5",
+    "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565",
+    "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84",
+    "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD",
+    "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B",
+    "eksblueprintKubectlHandlerRoleDefaultPolicyE312FA68",
+    "eksblueprintKubectlHandlerRole132A5996"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
+    "aws:asset:path": "eksblueprintawscdkawseksKubectlProvider39367B82.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "argocdnamespacestruct05557081": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+     ]
+    },
+    "Manifest": "[{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"name\":\"argocd\",\"labels\":{\"aws.cdk.eks/prune-c89c52833b2611b2758d8cd84250a51ad5c2ded867\":\"\"}}}]",
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "eksblueprintCreationRoleF5DD1341",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c89c52833b2611b2758d8cd84250a51ad5c2ded867",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "eksblueprintKubectlReadyBarrier554CE297"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/argocd-namespace-struct/Resource/Default"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Resource": "*",
+         "Action": [
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-412681425637-us-east-1",
+     "S3Key": "48e9fd6cee1d2c5f41da5c382b67d28876e6930ade034bffcfe0739f878fec68.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x"
+   },
+   "DependsOn": [
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.48e9fd6cee1d2c5f41da5c382b67d28876e6930ade034bffcfe0739f878fec68",
+    "aws:asset:property": "Code"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/AWSCDKCfnUtilsProviderCustomResourceProvider/Role"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-412681425637-us-east-1",
+     "S3Key": "28739348edff6f1084f6a50d8d934e2d3fc2a3bb77442d8a9a1361d51ccd03c0.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x"
+   },
+   "DependsOn": [
+    "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.28739348edff6f1084f6a50d8d934e2d3fc2a3bb77442d8a9a1361d51ccd03c0",
+    "aws:asset:property": "Code"
+   }
+  },
+  "clusterNameB220FB68": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "\"",
+       {
+        "Ref": "eksblueprint5FFC002D"
+       },
+       "\""
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/clusterName/Resource/Default"
+   }
+  },
+  "vpccniaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "vpc-cni",
+    "AddonVersion": "v1.13.2-eksbuild.1",
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "ConfigurationValues": "{\"env\":{}}",
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "DependsOn": [
+    "eksblueprintchartawsloadbalancercontrollerDA7B8D91"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/vpc-cni-addOn"
+   }
+  },
+  "corednsaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "coredns",
+    "AddonVersion": "v1.9.3-eksbuild.5",
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "DependsOn": [
+    "eksblueprintchartawsloadbalancercontrollerDA7B8D91"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/coredns-addOn"
+   }
+  },
+  "kubeproxyaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "kube-proxy",
+    "AddonVersion": "v1.25.6-eksbuild.1",
+    "ClusterName": {
+     "Ref": "eksblueprint5FFC002D"
+    },
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "DependsOn": [
+    "eksblueprintchartawsloadbalancercontrollerDA7B8D91"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/kube-proxy-addOn"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22SUW+jMAzHP0vfQ9ax27THY+jU9Xq3ofbU1ykkXpsCSRUnVBXiu8+EdmzSPdn+x9j+Gae8e3zk85k4YSJVldS65N3GC1kxkt46kCnvtkfJ8nezLXJWhLLWchNKA37QJm9tg4d/oqxh0ictQ7RSC6+t+UwenF/LYjAvwi+Eh5M4s8Lpltyp8NJ4cORfE8ZJLlHmadZ9A8azDcjgtD8vnA3HOMNXoWdVg7xbQSxApmdaNLxb23HgaAtLcDHh4v0VRuxATfo3oWd49yYQwSPPBkMxfwqyAv8kEFgtmlIJTp/9EWdwW3A48ENFg+R1QOJi2Qmz4PdsFcpICUgt9DugZy9Wwe4KMwUbcK2WkElpA2G/HsEsVW6NAekLZ1utqOwz1E2+Fy5uMFPKmr5na0AbnCRe6m2bKST8/z991ot4dBc7bXZDPvVT+vo3X4M/htjpN45KvKCezfmP2c/Lad2M20jqYRVJRbjS10mb3vPV6G/T+7imnhli5Qe8aW8feDrnt7MDap04otUN8PVoPwBXp1F8ugIAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "eks-blueprint/CDKMetadata/Default"
+   }
+  }
+ },
+ "Conditions": {
+  "eksblueprintHasEcrPublicBE9FE450": {
+   "Fn::Equals": [
+    {
+     "Ref": "AWS::Partition"
+    },
+    "aws"
+   ]
+  }
+ },
+ "Outputs": {
+  "eksblueprintClusterNameF2A3938C": {
+   "Value": {
+    "Ref": "eksblueprint5FFC002D"
+   }
+  },
+  "eksblueprintConfigCommandC5F2ABDA": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks update-kubeconfig --name ",
+      {
+       "Ref": "eksblueprint5FFC002D"
+      },
+      " --region us-east-1 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "eksblueprintAccessRoleBA6A9CB7",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "eksblueprintGetTokenCommandD17B69F1": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks get-token --cluster-name ",
+      {
+       "Ref": "eksblueprint5FFC002D"
+      },
+      " --region us-east-1 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "eksblueprintAccessRoleBA6A9CB7",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

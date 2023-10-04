@@ -1,0 +1,760 @@
+{
+  "version": "32.0.0",
+  "artifacts": {
+    "eks-blueprint.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "eks-blueprint.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "eks-blueprint": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://412681425637/us-east-1",
+      "properties": {
+        "templateFile": "eks-blueprint.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::412681425637:role/cdk-hnb659fds-deploy-role-412681425637-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::412681425637:role/cdk-hnb659fds-cfn-exec-role-412681425637-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-412681425637-us-east-1/f6ef6321340ccf573defdeceb2dfbc4b4dccfab3b4598bf9e2e0fae39ba2f2fa.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "eks-blueprint.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::412681425637:role/cdk-hnb659fds-lookup-role-412681425637-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "eks-blueprint.assets"
+      ],
+      "metadata": {
+        "/eks-blueprint/eks-blueprint-vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpc63DECCD0"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet1Subnet61827719"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet1RouteTable21A7C017"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet1RouteTableAssociationEE3DEFDF"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet1DefaultRouteB1D24F97"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet1EIP5CAED24C"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet1NATGateway79BA13C2"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet2Subnet9B247C15"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet2RouteTable785335C6"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet2RouteTableAssociation26630246"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet2DefaultRoute4172BF16"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet2EIP35FA39B6"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet2NATGateway99251FB0"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet3Subnet2D6C336B"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet3RouteTable00478BE2"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet3RouteTableAssociationED0184A8"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet3DefaultRoute93F3160E"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet3/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet3EIPB564A429"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PublicSubnet3/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPublicSubnet3NATGateway9C071715"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet1SubnetDA0563DD"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet1RouteTable09B6B428"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet1RouteTableAssociation749925D5"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet1DefaultRoute3BD6D450"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet2SubnetCD1F2410"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet2RouteTableCAE3B2ED"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet2RouteTableAssociationD4762B84"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet2DefaultRouteC49FF565"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet3Subnet6BCB118E"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet3RouteTable150AC721"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet3RouteTableAssociation2BCB1B2B"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/PrivateSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcPrivateSubnet3DefaultRoute9D515DFD"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcIGWA4E10818"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcVPCGW9071F94F"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintvpcRestrictDefaultSecurityGroupCustomResourceBE0A8D43"
+          }
+        ],
+        "/eks-blueprint/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/eks-blueprint/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-kms-key/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintkmskeyAF19CF0B"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint-AccessRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintAccessRoleBA6A9CB7"
+          }
+        ],
+        "/eks-blueprint/kubectllayer25/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "kubectllayer2595F4425A"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/KubectlHandlerRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintKubectlHandlerRole132A5996"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/KubectlHandlerRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintKubectlHandlerRoleDefaultPolicyE312FA68"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintRoleAA7BB8F6"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/ControlPlaneSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintControlPlaneSecurityGroup13BCED08"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/Resource/CreationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintCreationRoleF5DD1341"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/Resource/CreationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintCreationRoleDefaultPolicy7A8D158B"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprint5FFC002D"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/KubectlReadyBarrier": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintKubectlReadyBarrier554CE297"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/HasEcrPublic": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintHasEcrPublicBE9FE450"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/ClusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintClusterNameF2A3938C"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/AwsAuth/manifest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintAwsAuthmanifest443E8097"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/ConfigCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintConfigCommandC5F2ABDA"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/GetTokenCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintGetTokenCommandD17B69F1"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/Nodegroupeks-blueprint-ng-ng/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintNodegroupeksblueprintngngNodeGroupRole4B4E34D4"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/Nodegroupeks-blueprint-ng-ng/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintNodegroupeksblueprintngng750FE868"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/argo-cd-server/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintargocdserverConditionJsonAC3C7A3E"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/argo-cd-server/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintargocdserverRoleDE25B2FB"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/argo-cd-server/manifest-argo-cd-serverServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintargocdservermanifestargocdserverServiceAccountResource13CB795F"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/OpenIdConnectProvider/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintOpenIdConnectProvider44243F0A"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/chart-argocd-addon/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintchartargocdaddon897949CA"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/chart-calico-operator/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintchartcalicooperatorA41F9792"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/chart-metrics-server/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintchartmetricsserverC18F534D"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-managed-policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintblueprintsaddonclusterautoscalermanagedpolicyCC256345"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-sa/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintblueprintsaddonclusterautoscalersaConditionJsonD8DC27B7"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-sa/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintblueprintsaddonclusterautoscalersaRoleE623151C"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/blueprints-addon-cluster-autoscaler-sa/manifest-blueprints-addon-cluster-autoscaler-saServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintblueprintsaddonclusterautoscalersamanifestblueprintsaddonclusterautoscalersaServiceAccountResource72D82586"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/chart-cluster-autoscaler/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintchartclusterautoscaler72A0AB35"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/aws-load-balancer-controller/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawsloadbalancercontrollerConditionJsonFC89052E"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/aws-load-balancer-controller/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawsloadbalancercontrollerRole1AAA4349"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/aws-load-balancer-controller/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawsloadbalancercontrollerRoleDefaultPolicyCEEA8F9D"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource32DFFE2C"
+          }
+        ],
+        "/eks-blueprint/eks-blueprint/chart-aws-load-balancer-controller/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintchartawsloadbalancercontrollerDA7B8D91"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeProxyAgentLayer924C1971"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRole15A26729"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandler42BEBAE0"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRole5810CC58"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandler7073F4DA"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleB1087139"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisComplete26D7B0CB"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRole28643D26"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeout0B47CA38"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRole0C7159F9"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Providerwaiterstatemachine5D4A9DF0"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/eksblueprintawscdkawseksClusterResourceProviderOnEventHandlerServiceRole33AAF146Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawscdkawseksClusterResourceProviderOnEventHandlerServiceRole33AAF146Arn"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/eksblueprintawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole7509B4A2Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole7509B4A2Arn"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider/eksblueprintawscdkawseksClusterResourceProviderframeworkonEvent103F7336Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawscdkawseksClusterResourceProviderframeworkonEvent103F7336Arn"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Handler886CB40B"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsCliLayerF44AAF94"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintawscdkawseksKubectlProviderframeworkonEvent3BFA8E46Arn"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintkubectllayer2508C72290Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprintkubectllayer2508C72290Ref"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintKubectlHandlerRole75C1BC6FArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprintKubectlHandlerRole75C1BC6FArn"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprinteksblueprintvpcPrivateSubnet1Subnet5469AC37Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprinteksblueprintvpcPrivateSubnet1Subnet5469AC37Ref"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprinteksblueprintvpcPrivateSubnet2Subnet80B7C638Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprinteksblueprintvpcPrivateSubnet2Subnet80B7C638Ref"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprinteksblueprintvpcPrivateSubnet3Subnet70983311Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprinteksblueprintvpcPrivateSubnet3Subnet70983311Ref"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprint4AF8E185ClusterSecurityGroupId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprint4AF8E185ClusterSecurityGroupId"
+          }
+        ],
+        "/eks-blueprint/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/eks-blueprint/argocd-namespace-struct/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "argocdnamespacestruct05557081"
+          }
+        ],
+        "/eks-blueprint/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+          }
+        ],
+        "/eks-blueprint/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
+          }
+        ],
+        "/eks-blueprint/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+          }
+        ],
+        "/eks-blueprint/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
+          }
+        ],
+        "/eks-blueprint/clusterName/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "clusterNameB220FB68"
+          }
+        ],
+        "/eks-blueprint/vpc-cni-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpccniaddOn"
+          }
+        ],
+        "/eks-blueprint/coredns-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "corednsaddOn"
+          }
+        ],
+        "/eks-blueprint/kube-proxy-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "kubeproxyaddOn"
+          }
+        ],
+        "/eks-blueprint/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/eks-blueprint/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/eks-blueprint/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "eks-blueprint"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
