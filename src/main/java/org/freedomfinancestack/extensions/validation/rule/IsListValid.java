@@ -1,10 +1,10 @@
-package org.freedomfinancestack.extensions.validation.validator.rule;
+package org.freedomfinancestack.extensions.validation.rule;
 
 import java.util.List;
 
 import org.freedomfinancestack.extensions.utils.Util;
+import org.freedomfinancestack.extensions.validation.Validator;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
-import org.freedomfinancestack.extensions.validation.validator.Validator;
 
 public class IsListValid<T> implements Validator<List<T>> {
 

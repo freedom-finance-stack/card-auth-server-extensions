@@ -1,18 +1,20 @@
-package org.freedomfinancestack.extensions.validation.validator.basic;
+package org.freedomfinancestack.extensions.validation.basic;
+
+import java.util.UUID;
 
 import org.freedomfinancestack.extensions.utils.Util;
+import org.freedomfinancestack.extensions.validation.Validator;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
-import org.freedomfinancestack.extensions.validation.validator.Validator;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class IsNumeric implements Validator<String> {
-    private static final IsNumeric INSTANCE = new IsNumeric();
+public class IsUUID implements Validator<String> {
+    private static final IsUUID INSTANCE = new IsUUID();
 
-    public static IsNumeric isNumeric() {
+    public static IsUUID isUUID() {
         return INSTANCE;
     }
 
@@ -21,7 +23,9 @@ public class IsNumeric implements Validator<String> {
         if (Util.isNullorBlank(value)) {
             return;
         }
-        if (!value.matches("[0-9]+")) {
+        try {
+            UUID.fromString(value);
+        } catch (IllegalArgumentException exception) {
             throw new ValidationException(
                     ValidationErrorCode.INVALID_FORMAT_VALUE, "Invalid value");
         }

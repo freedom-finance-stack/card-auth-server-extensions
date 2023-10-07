@@ -1,7 +1,7 @@
-package org.freedomfinancestack.extensions.validation.validator.rule;
+package org.freedomfinancestack.extensions.validation.rule;
 
+import org.freedomfinancestack.extensions.validation.Validator;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
-import org.freedomfinancestack.extensions.validation.validator.Validator;
 
 public class When<T> implements Validator<T> {
     private final boolean condition;

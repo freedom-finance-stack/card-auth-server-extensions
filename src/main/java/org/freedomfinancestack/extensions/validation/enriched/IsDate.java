@@ -1,13 +1,13 @@
-package org.freedomfinancestack.extensions.validation.validator.enriched;
+package org.freedomfinancestack.extensions.validation.enriched;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.freedomfinancestack.extensions.utils.Util;
+import org.freedomfinancestack.extensions.validation.Validator;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
-import org.freedomfinancestack.extensions.validation.validator.Validator;
 
 public class IsDate implements Validator<String> {
 

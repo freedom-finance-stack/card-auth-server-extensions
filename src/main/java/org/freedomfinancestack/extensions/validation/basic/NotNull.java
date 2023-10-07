@@ -1,8 +1,8 @@
-package org.freedomfinancestack.extensions.validation.validator.basic;
+package org.freedomfinancestack.extensions.validation.basic;
 
+import org.freedomfinancestack.extensions.validation.Validator;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
-import org.freedomfinancestack.extensions.validation.validator.Validator;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
