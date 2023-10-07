@@ -2,13 +2,13 @@ package org.freedomfinancestack.extensions.validation.validator.basic;
 
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
-import org.freedomfinancestack.extensions.validation.validator.Validatable;
+import org.freedomfinancestack.extensions.validation.validator.Validator;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class NotNull<T> implements Validatable<T> {
+public class NotNull<T> implements Validator<T> {
 
     public static <T> NotNull<T> notNull() {
         return new NotNull<T>();

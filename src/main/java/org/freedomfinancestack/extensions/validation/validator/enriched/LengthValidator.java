@@ -4,8 +4,6 @@ import org.freedomfinancestack.extensions.utils.Util;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
 import org.freedomfinancestack.extensions.validation.validator.Validator;
-import org.freedomfinancestack.razorpay.cas.admin.utils.Util;
-import org.freedomfinancestack.razorpay.cas.admin.validation.validator.Validator;
 
 public class LengthValidator implements Validator<String> {
 
