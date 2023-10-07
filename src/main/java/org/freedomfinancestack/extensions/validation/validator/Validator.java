@@ -1,4 +1,4 @@
-package org.freedomfinancestack.extensions.validation;
+package org.freedomfinancestack.extensions.validation.validator;
 
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
 

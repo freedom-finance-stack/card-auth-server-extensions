@@ -2,10 +2,9 @@ package org.freedomfinancestack.extensions.validation.validator.basic;
 
 import java.util.stream.Stream;
 
-import org.freedomfinancestack.extensions.validation.Validatable;
-import org.freedomfinancestack.extensions.validation.basic.IsValidObject;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
+import org.freedomfinancestack.extensions.validation.validator.Validatable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

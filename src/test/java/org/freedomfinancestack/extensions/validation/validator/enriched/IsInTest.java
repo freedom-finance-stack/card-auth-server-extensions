@@ -1,6 +1,5 @@
 package org.freedomfinancestack.extensions.validation.validator.enriched;
 
-import org.freedomfinancestack.extensions.validation.enriched.IsIn;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 

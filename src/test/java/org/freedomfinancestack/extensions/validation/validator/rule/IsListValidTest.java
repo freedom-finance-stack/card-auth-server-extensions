@@ -3,10 +3,9 @@ package org.freedomfinancestack.extensions.validation.validator.rule;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.freedomfinancestack.extensions.validation.Validator;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
-import org.freedomfinancestack.extensions.validation.rule.IsListValid;
+import org.freedomfinancestack.extensions.validation.validator.Validator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

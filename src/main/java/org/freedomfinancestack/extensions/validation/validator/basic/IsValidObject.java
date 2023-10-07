@@ -1,10 +1,10 @@
-package org.freedomfinancestack.extensions.validation.basic;
+package org.freedomfinancestack.extensions.validation.validator.basic;
 
 import org.freedomfinancestack.extensions.utils.Util;
-import org.freedomfinancestack.extensions.validation.Validatable;
-import org.freedomfinancestack.extensions.validation.Validator;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
+import org.freedomfinancestack.extensions.validation.validator.Validatable;
+import org.freedomfinancestack.extensions.validation.validator.Validator;
 
 public class IsValidObject<T extends Validatable> implements Validator<T> {
 

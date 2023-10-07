@@ -2,7 +2,6 @@ package org.freedomfinancestack.extensions.validation.validator.basic;
 
 import java.util.stream.Stream;
 
-import org.freedomfinancestack.extensions.validation.basic.IsNumeric;
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
 import org.junit.jupiter.api.Test;
