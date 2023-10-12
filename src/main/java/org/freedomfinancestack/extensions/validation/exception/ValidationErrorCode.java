@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum ValidationErrorCode {
-    INVALID_FORMAT("203", "Format of one or more elements is invalid"),
-    INVALID_FORMAT_LENGTH("203", "Invalid Format - Length"),
-    INVALID_FORMAT_VALUE("203", "Invalid Format - Value"),
-    REQUIRED_DATA_ELEMENT_MISSING("201", "A element required is missing from the request.");
+    INVALID_FORMAT("1000", "Format of one or more elements is invalid"),
+    INVALID_FORMAT_LENGTH("1001", "Invalid Format - Length"),
+    INVALID_FORMAT_VALUE("1002", "Invalid Format - Value"),
+    REQUIRED_DATA_ELEMENT_MISSING("1003", "A element required is missing from the request.");
 
     private final String errorCode;
     private final String defaultErrorMessage;
