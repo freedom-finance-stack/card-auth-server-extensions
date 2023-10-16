@@ -17,18 +17,17 @@ public class HexDump {
             return null;
         }
         StringBuffer out = new StringBuffer(in.length * 2);
-        String lFormatString = new String("%1$04x:");
-        String lPadding = new String(" ");
+        String lFormatString = "%1$04x:";
+        String lPadding = " ";
         while (oldIndex + 1 <= in.length) {
-            out.append(String.format(lFormatString, new Object[] {new Integer(oldIndex)}));
+            out.append(String.format(lFormatString, oldIndex));
             newIndex = WriteHex(in, oldIndex, out);
             out.append(lPadding);
             newIndex = WriteAscii(in, oldIndex, out);
             oldIndex += newIndex;
-            out.append(String.format("%1$c", new Object[] {Integer.valueOf(10)}));
+            out.append(String.format("%1$c", 10));
         }
-        String rslt = new String(out);
-        return rslt;
+        return new String(out);
     }
 
     public static String byteArrayToHex(byte[] in) {
