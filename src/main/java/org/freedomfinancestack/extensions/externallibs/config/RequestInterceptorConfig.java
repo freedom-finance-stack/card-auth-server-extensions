@@ -1,14 +1,13 @@
 package org.freedomfinancestack.extensions.externallibs.config;
 
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 
 import org.freedomfinancestack.extensions.externallibs.security.SecurityModuleAWS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

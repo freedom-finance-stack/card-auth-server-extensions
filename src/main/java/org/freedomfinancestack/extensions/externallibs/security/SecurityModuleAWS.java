@@ -3,13 +3,11 @@ package org.freedomfinancestack.extensions.externallibs.security;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@ComponentScan(value = {"org.freedomfinancestack.extensions"})
 @Component("securityModuleAWS")
 @ConditionalOnProperty(
         name = "external-libs.security.SecurityModuleAWS.enabled",
