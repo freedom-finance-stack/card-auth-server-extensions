@@ -1,10 +1,9 @@
 package org.freedomfinancestack.extensions.externallibs.security;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
