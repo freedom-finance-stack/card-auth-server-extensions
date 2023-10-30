@@ -1,10 +1,11 @@
 package org.freedomfinancestack.extensions.notification.impl;
 
-import lombok.extern.slf4j.Slf4j;
 import org.freedomfinancestack.extensions.notification.EmailNotificationService;
 import org.freedomfinancestack.extensions.notification.dto.EmailNotificationDto;
 import org.freedomfinancestack.extensions.notification.enums.EmailChannelType;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j

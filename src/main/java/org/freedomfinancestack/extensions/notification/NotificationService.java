@@ -1,6 +1,5 @@
 package org.freedomfinancestack.extensions.notification;
 
-import lombok.RequiredArgsConstructor;
 import org.freedomfinancestack.extensions.notification.dto.EmailNotificationDto;
 import org.freedomfinancestack.extensions.notification.dto.NotificationDto;
 import org.freedomfinancestack.extensions.notification.dto.SMSNotificationDto;
@@ -8,6 +7,8 @@ import org.freedomfinancestack.extensions.notification.enums.NotificationChannel
 import org.freedomfinancestack.extensions.notification.factory.EmailNotificationFactory;
 import org.freedomfinancestack.extensions.notification.factory.SMSNotificationFactory;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

@@ -1,11 +1,12 @@
 package org.freedomfinancestack.extensions.notification.factory;
 
-import lombok.extern.slf4j.Slf4j;
 import org.freedomfinancestack.extensions.notification.EmailNotificationService;
 import org.freedomfinancestack.extensions.notification.NotificationConfiguration;
 import org.freedomfinancestack.extensions.notification.enums.EmailChannelType;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j

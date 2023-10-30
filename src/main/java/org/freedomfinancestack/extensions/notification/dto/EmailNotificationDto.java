@@ -1,10 +1,10 @@
 package org.freedomfinancestack.extensions.notification.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 import java.util.Map;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
