@@ -26,8 +26,14 @@ public class isJsonObjectLengthValid implements Validator<Object> {
         if (Util.isNullorBlank(value)) {
             return;
         }
-        String dataString = gson.toJson(value);
-        if (dataString.length() > length) {
+        String dataString;
+        try {
+            dataString = gson.toJson(value);
+        } catch (Exception e) {
+            throw new ValidationException(ValidationErrorCode.INVALID_FORMAT, "Invalid value");
+        }
+
+        if (!dataString.isEmpty() && dataString.length() > length) {
             throw new ValidationException(
                     ValidationErrorCode.INVALID_FORMAT_LENGTH, "Invalid value");
         }
