@@ -8,17 +8,17 @@ import org.freedomfinancestack.extensions.validation.validator.Validator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class JsonObjectLengthValidator implements Validator<Object> {
+public class isJsonObjectLengthValid implements Validator<Object> {
 
     private final int length;
     public static Gson gson = new GsonBuilder().create();
 
-    public JsonObjectLengthValidator(int length) {
+    public isJsonObjectLengthValid(int length) {
         this.length = length;
     }
 
-    public static JsonObjectLengthValidator jsonObjectLengthValidator(int length) {
-        return new JsonObjectLengthValidator(length);
+    public static isJsonObjectLengthValid isJsonObjectLengthValid(int length) {
+        return new isJsonObjectLengthValid(length);
     }
 
     @Override

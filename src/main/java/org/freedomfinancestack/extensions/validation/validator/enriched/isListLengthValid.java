@@ -8,19 +8,19 @@ import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCo
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
 import org.freedomfinancestack.extensions.validation.validator.Validator;
 
-public class ListLengthValidator<T> implements Validator<List<T>> {
+public class isListLengthValid<T> implements Validator<List<T>> {
 
     private final int length;
     private final DataLengthType lengthType;
 
-    public ListLengthValidator(int length, DataLengthType lengthType) {
+    public isListLengthValid(int length, DataLengthType lengthType) {
         this.length = length;
         this.lengthType = lengthType;
     }
 
-    public static <T> ListLengthValidator<T> listLengthValidator(
+    public static <T> isListLengthValid<T> isListLengthValid(
             DataLengthType lengthType, int length) {
-        return new ListLengthValidator<T>(length, lengthType);
+        return new isListLengthValid<T>(length, lengthType);
     }
 
     @Override
