@@ -32,7 +32,7 @@ public class NotificationService {
                     "Empty Notification Channel Type");
         }
         switch (channelType) {
-            case EMAIL -> {
+            case EMAIL:
                 if (notificationDto instanceof EmailNotificationDto) {
                     return emailNotificationFactory
                             .getEmailNotificationService()
@@ -42,8 +42,7 @@ public class NotificationService {
                             NotificationErrorCode.INVALID_NOTIFICATION_DTO,
                             "Invalid notification dto type for EMAIL channel.");
                 }
-            }
-            case SMS -> {
+            case SMS:
                 if (notificationDto instanceof SMSNotificationDto) {
                     return smsNotificationFactory
                             .getSMSNotificationService()
@@ -53,7 +52,6 @@ public class NotificationService {
                             NotificationErrorCode.INVALID_NOTIFICATION_DTO,
                             "Invalid notification dto type for SMS channel.");
                 }
-            }
         }
         return NotificationResponseDto.failure();
     }
