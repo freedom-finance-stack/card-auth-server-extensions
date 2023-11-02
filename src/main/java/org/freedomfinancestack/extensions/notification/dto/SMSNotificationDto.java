@@ -1,6 +1,7 @@
 package org.freedomfinancestack.extensions.notification.dto;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Builder
 public class SMSNotificationDto extends NotificationDto {
     int priority;
-    String message;
+    String templateName;
+    Map<String, String> templateData;
     List<String> to;
 }

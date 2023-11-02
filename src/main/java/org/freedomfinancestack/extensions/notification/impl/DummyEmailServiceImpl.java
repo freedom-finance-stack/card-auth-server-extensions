@@ -2,6 +2,7 @@ package org.freedomfinancestack.extensions.notification.impl;
 
 import org.freedomfinancestack.extensions.notification.EmailNotificationService;
 import org.freedomfinancestack.extensions.notification.dto.EmailNotificationDto;
+import org.freedomfinancestack.extensions.notification.dto.NotificationResponseDto;
 import org.freedomfinancestack.extensions.notification.enums.EmailChannelType;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 public class DummyEmailServiceImpl implements EmailNotificationService {
     @Override
     public EmailChannelType getEmailChannelType() {
-        return EmailChannelType.SMTP_API_DUMMY;
+        return EmailChannelType.EMAIL_API_DUMMY;
     }
 
     @Override
-    public boolean send(EmailNotificationDto notificationDto) {
+    public NotificationResponseDto send(EmailNotificationDto notificationDto) {
         notificationDto
                 .getTo()
                 .forEach(
@@ -29,6 +30,6 @@ public class DummyEmailServiceImpl implements EmailNotificationService {
                                         notificationDto.getSubject(),
                                         notificationDto.getTemplateName(),
                                         notificationDto.getTemplateData()));
-        return true;
+        return NotificationResponseDto.success();
     }
 }

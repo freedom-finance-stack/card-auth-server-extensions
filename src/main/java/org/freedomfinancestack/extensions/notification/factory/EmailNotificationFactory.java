@@ -3,6 +3,8 @@ package org.freedomfinancestack.extensions.notification.factory;
 import org.freedomfinancestack.extensions.notification.EmailNotificationService;
 import org.freedomfinancestack.extensions.notification.NotificationConfiguration;
 import org.freedomfinancestack.extensions.notification.enums.EmailChannelType;
+import org.freedomfinancestack.extensions.notification.exception.NotificationErrorCode;
+import org.freedomfinancestack.extensions.notification.exception.NotificationException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -17,19 +19,22 @@ public class EmailNotificationFactory {
 
     private NotificationConfiguration notificationConfig;
 
-    public EmailNotificationService getEmailNotificationService() {
-        EmailNotificationService smtpNotificationService = null;
-        String smtpAPIType = notificationConfig.getEmail().getEnabledChannel();
-        EmailChannelType smtpAPI = EmailChannelType.getEmailChannelType(smtpAPIType);
-
-        switch (smtpAPI) {
+    public EmailNotificationService getEmailNotificationService() throws NotificationException {
+        EmailNotificationService notificationService = null;
+        String emailAPIType = notificationConfig.getEmail().getEnabledChannel();
+        EmailChannelType emailAPI = EmailChannelType.getEmailChannelType(emailAPIType);
+        if (emailAPI == null) {
+            throw new NotificationException(
+                    NotificationErrorCode.INVALID_CHANNEL_PROVIDED, "Invalid EMAIL Channel Type");
+        }
+        switch (emailAPI) {
             case SMTP_API_SERVER:
-                smtpNotificationService = smtpServerNotificationService;
+                notificationService = smtpServerNotificationService;
                 break;
             default:
-                smtpNotificationService = dummySMTPNotificationService;
+                notificationService = dummySMTPNotificationService;
                 break;
         }
-        return smtpNotificationService;
+        return notificationService;
     }
 }

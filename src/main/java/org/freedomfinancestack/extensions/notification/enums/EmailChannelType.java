@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum EmailChannelType {
     SMTP_API_SERVER("smtp-server"),
-    SMTP_API_DUMMY("dummy-smtp-server");
+    EMAIL_API_DUMMY("dummy-email-server");
 
     @Getter private final String apiName;
 
