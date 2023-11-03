@@ -8,18 +8,23 @@ import org.freedomfinancestack.extensions.notification.exception.NotificationExc
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
 public class EmailNotificationFactory {
-    @Qualifier("smtpEmailServiceImpl") private final EmailNotificationService smtpServerNotificationService;
-
-    @Qualifier("dummyEmailServiceImpl") private final EmailNotificationService dummySMTPNotificationService;
-
+    private final EmailNotificationService smtpServerNotificationService;
+    private final EmailNotificationService dummySMTPNotificationService;
     private final NotificationConfiguration notificationConfig;
+
+    public EmailNotificationFactory(
+            NotificationConfiguration notificationConfig,
+            @Qualifier("smtpEmailServiceImpl") EmailNotificationService smtpServerNotificationService,
+            @Qualifier("dummyEmailServiceImpl") EmailNotificationService dummySMTPNotificationService) {
+        this.smtpServerNotificationService = smtpServerNotificationService;
+        this.dummySMTPNotificationService = dummySMTPNotificationService;
+        this.notificationConfig = notificationConfig;
+    }
 
     public EmailNotificationService getEmailNotificationService() throws NotificationException {
         EmailNotificationService notificationService = null;
