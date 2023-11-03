@@ -13,11 +13,18 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class EmailNotificationFactory {
-    @Qualifier("smtpServerServiceImpl") private EmailNotificationService smtpServerNotificationService;
+    private final EmailNotificationService smtpServerNotificationService;
+    private final EmailNotificationService dummySMTPNotificationService;
+    private final NotificationConfiguration notificationConfig;
 
-    @Qualifier("dummyEmailServiceImpl") private EmailNotificationService dummySMTPNotificationService;
-
-    private NotificationConfiguration notificationConfig;
+    public EmailNotificationFactory(
+            NotificationConfiguration notificationConfig,
+            @Qualifier("smtpEmailServiceImpl") EmailNotificationService smtpServerNotificationService,
+            @Qualifier("dummyEmailServiceImpl") EmailNotificationService dummySMTPNotificationService) {
+        this.smtpServerNotificationService = smtpServerNotificationService;
+        this.dummySMTPNotificationService = dummySMTPNotificationService;
+        this.notificationConfig = notificationConfig;
+    }
 
     public EmailNotificationService getEmailNotificationService() throws NotificationException {
         EmailNotificationService notificationService = null;
