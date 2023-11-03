@@ -8,14 +8,16 @@ import org.freedomfinancestack.extensions.notification.exception.NotificationExc
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class SMSNotificationFactory {
-    @Qualifier("dummySMSServiceImpl") private SMSNotificationService dummySMSService;
+    @Qualifier("dummySMSServiceImpl") private final SMSNotificationService dummySMSService;
 
-    private NotificationConfiguration notificationConfig;
+    private final NotificationConfiguration notificationConfig;
 
     public SMSNotificationService getSMSNotificationService() throws NotificationException {
         SMSNotificationService smsNotificationService = null;
