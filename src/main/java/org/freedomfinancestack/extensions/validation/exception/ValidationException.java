@@ -20,6 +20,12 @@ public class ValidationException extends Exception {
     }
 
     public ValidationException(
+            @NonNull final ValidationErrorCode validationErrorCode, @NonNull final String message) {
+        super(message);
+        this.validationErrorCode = validationErrorCode;
+    }
+
+    public ValidationException(
             @NonNull final ValidationErrorCode validationErrorCode,
             @NonNull final String message,
             @NonNull final Throwable cause) {
