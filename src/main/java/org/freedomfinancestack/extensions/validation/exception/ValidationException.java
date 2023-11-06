@@ -8,11 +8,15 @@ public class ValidationException extends Exception {
     private static final long serialVersionUID = 1L;
 
     @Getter private final ValidationErrorCode validationErrorCode;
+    @Getter private String fieldName;
 
     public ValidationException(
-            @NonNull final ValidationErrorCode validationErrorCode, @NonNull final String message) {
+            @NonNull final ValidationErrorCode validationErrorCode,
+            @NonNull final String fieldName,
+            @NonNull final String message) {
         super(message);
         this.validationErrorCode = validationErrorCode;
+        this.fieldName = fieldName;
     }
 
     public ValidationException(

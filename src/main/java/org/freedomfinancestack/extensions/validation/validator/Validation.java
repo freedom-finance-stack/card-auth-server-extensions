@@ -18,7 +18,7 @@ public class Validation {
                         validationRule.getClass().getSimpleName(),
                         fieldName);
                 throw new ValidationException(
-                        e.getValidationErrorCode(), "Invalid value for " + fieldName);
+                        e.getValidationErrorCode(), fieldName, "Invalid value for " + fieldName);
             }
         }
     }
