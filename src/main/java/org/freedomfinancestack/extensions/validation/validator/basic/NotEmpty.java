@@ -1,11 +1,11 @@
 package org.freedomfinancestack.extensions.validation.validator.basic;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import org.freedomfinancestack.extensions.validation.exception.ValidationErrorCode;
 import org.freedomfinancestack.extensions.validation.exception.ValidationException;
 import org.freedomfinancestack.extensions.validation.validator.Validator;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class NotEmpty<T> implements Validator<T> {
