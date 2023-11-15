@@ -8,10 +8,10 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class NotEmpty<T> implements Validator<T> {
+public class NotBlank<T> implements Validator<T> {
 
-    public static <T> NotEmpty<T> notEmpty() {
-        return new NotEmpty<T>();
+    public static <T> NotBlank<T> notBlank() {
+        return new NotBlank<T>();
     }
 
     @Override
