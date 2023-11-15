@@ -10,28 +10,28 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class NotNullTest {
+public class NotEmptyTest {
 
     @ParameterizedTest
-    @MethodSource("provideValidateValidNotNull")
-    public void testValidateValidNotNull(Object val) throws ValidationException {
-        NotNull.notNull().validate(val);
+    @MethodSource("provideValidateValidNotEmpty")
+    public void testValidateValidNotEmpty(Object val) throws ValidationException {
+        NotEmpty.notEmpty().validate(val);
         // No exception should be thrown
     }
 
-    public static Stream<Object> provideValidateValidNotNull() {
+    public static Stream<Object> provideValidateValidNotEmpty() {
         return Stream.of("123", new Object(), 12);
     }
 
-    public static Stream<Object> provideValidateInvalidNotNull() {
-        return Stream.of(null, "", "");
+    public static Stream<Object> provideValidateInvalidNotEmpty() {
+        return Stream.of("");
     }
 
     @ParameterizedTest
-    @MethodSource("provideValidateInvalidNotNull")
-    public void testValidateInValidNotNull(Object val) {
+    @MethodSource("provideValidateInvalidNotEmpty")
+    public void testValidateInValidNotEmpty(Object val) {
         ValidationException e =
-                assertThrows(ValidationException.class, () -> NotNull.notNull().validate(val));
-        assertEquals(ValidationErrorCode.REQUIRED_DATA_ELEMENT_MISSING, e.getValidationErrorCode());
+                assertThrows(ValidationException.class, () -> NotEmpty.notEmpty().validate(val));
+        assertEquals(ValidationErrorCode.INVALID_FORMAT_VALUE, e.getValidationErrorCode());
     }
 }
