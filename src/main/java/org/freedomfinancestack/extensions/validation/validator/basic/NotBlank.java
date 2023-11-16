@@ -21,7 +21,7 @@ public class NotBlank<T> implements Validator<T> {
                     ValidationErrorCode.REQUIRED_DATA_ELEMENT_MISSING, "Invalid value");
         } else if ("".equals(value.toString())) {
             throw new ValidationException(
-                    ValidationErrorCode.INVALID_FORMAT_VALUE, "Invalid value");
+                    ValidationErrorCode.REQUIRED_DATA_ELEMENT_MISSING, "Invalid value");
         }
     }
 }
