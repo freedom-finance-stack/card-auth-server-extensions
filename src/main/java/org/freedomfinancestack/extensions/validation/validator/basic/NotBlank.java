@@ -8,10 +8,10 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class NotNull<T> implements Validator<T> {
+public class NotBlank<T> implements Validator<T> {
 
-    public static <T> NotNull<T> notNull() {
-        return new NotNull<T>();
+    public static <T> NotBlank<T> notBlank() {
+        return new NotBlank<T>();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class NotNull<T> implements Validator<T> {
                     ValidationErrorCode.REQUIRED_DATA_ELEMENT_MISSING, "Invalid value");
         } else if ("".equals(value.toString())) {
             throw new ValidationException(
-                    ValidationErrorCode.REQUIRED_DATA_ELEMENT_MISSING, "Invalid value");
+                    ValidationErrorCode.INVALID_FORMAT_VALUE, "Invalid value");
         }
     }
 }
