@@ -32,7 +32,7 @@ public class NotBlankTest {
     public void testValidateInValidNotBlank(Object val) {
         ValidationException e =
                 assertThrows(ValidationException.class, () -> NotBlank.notBlank().validate(val));
-        assertEquals(ValidationErrorCode.INVALID_FORMAT_VALUE, e.getValidationErrorCode());
+        assertEquals(ValidationErrorCode.REQUIRED_DATA_ELEMENT_MISSING, e.getValidationErrorCode());
     }
 
     public static Stream<Object> provideValidateInvalidNotBlankNull() {
