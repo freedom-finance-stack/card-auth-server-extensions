@@ -23,8 +23,8 @@ public class When<T> implements Validator<T> {
         return new When<T>(condition, rules, null);
     }
 
-    public When<T> elseRules(Validator<T> validationRule) {
-        return new When<T>(condition, this.ifValidationRule, validationRule);
+    public void elseRules(Validator<T> validationRule) {
+        this.elseValidationRule = validationRule;
     }
 
     @Override
