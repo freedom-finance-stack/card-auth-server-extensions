@@ -23,6 +23,10 @@ public class When<T> implements Validator<T> {
         return new When<T>(condition, rules, null);
     }
 
+    public static <T> When<T> when(boolean condition, Validator<T> rules, Validator<T> elseRules) {
+        return new When<T>(condition, rules, elseRules);
+    }
+
     public void elseRules(Validator<T> validationRule) {
         this.elseValidationRule = validationRule;
     }
