@@ -63,8 +63,8 @@ public class WhenTest {
                     }
                 };
 
-        When<String> when = When.when(false, mockValidator1).elseRules(mockValidator2);
-
+        When<String> when = When.when(false, mockValidator1);
+        when.elseRules(mockValidator2);
         when.validate("valid2"); // Should pass without throwing an exception
         assertThrows(ValidationException.class, () -> when.validate("valid1"));
         assertThrows(ValidationException.class, () -> when.validate("invalid"));
@@ -90,7 +90,8 @@ public class WhenTest {
                     }
                 };
 
-        When<String> when = When.when(true, mockValidator1).elseRules(mockValidator2);
+        When<String> when = When.when(true, mockValidator1);
+        when.elseRules(mockValidator2);
 
         when.validate("valid1"); // Should pass without throwing an exception
         assertThrows(ValidationException.class, () -> when.validate("valid2"));
