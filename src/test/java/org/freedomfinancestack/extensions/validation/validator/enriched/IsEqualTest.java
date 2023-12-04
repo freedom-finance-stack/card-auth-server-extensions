@@ -41,7 +41,6 @@ public class IsEqualTest {
     void testPrimitiveValue() throws ValidationException {
         int expectedValue = 3;
         IsEqual<Integer> validator = IsEqual.isEqual(expectedValue);
-        // Blank value should not throw an exception
         validator.validate(3);
     }
 }
