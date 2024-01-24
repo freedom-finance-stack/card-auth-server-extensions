@@ -4,14 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class AES256EncryptionUtilsTest {
+public class AES256EncryptionTest {
 
-    private AES256EncryptionUtils aes256EncryptionUtils;
+    private AES256Encryption aes256EncryptionUtils;
 
     @BeforeEach
     public void setUp() {
         aes256EncryptionUtils =
-                new AES256EncryptionUtils(new AES256EncryptionConfig("53c433t2", "53c433t2"));
+                new AES256Encryption(new AES256EncryptionConfig("53c433t2", "53c433t2"));
     }
 
     @Test

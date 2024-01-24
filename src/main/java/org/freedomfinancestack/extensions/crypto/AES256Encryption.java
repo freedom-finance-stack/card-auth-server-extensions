@@ -4,12 +4,18 @@ import org.springframework.security.crypto.codec.Hex;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 
-public class AES256EncryptionUtils implements EncryptionUtils {
+/** Implementation of {@link IEncryption} using AES-256 encryption algorithm. */
+public class AES256Encryption implements IEncryption {
     private final TextEncryptor encryptor;
 
-    public AES256EncryptionUtils(AES256EncryptionConfig aES256EncryptionConfig) {
+    /**
+     * Constructs AES256Encryption with the specified configuration.
+     *
+     * @param aES256EncryptionConfig The configuration for AES-256 encryption.
+     */
+    public AES256Encryption(AES256EncryptionConfig aES256EncryptionConfig) {
         this.encryptor =
-                Encryptors.text(
+                Encryptors.delux(
                         hex(aES256EncryptionConfig.getPassword()),
                         hex(aES256EncryptionConfig.getSalt()));
     }
