@@ -1,0 +1,75 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: aws-load-balancer-controller
+    meta.helm.sh/release-namespace: kube-system
+  creationTimestamp: "2023-10-12T08:27:11Z"
+  labels:
+    app.kubernetes.io/component: webhook
+    app.kubernetes.io/instance: aws-load-balancer-controller
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: aws-load-balancer-controller
+    app.kubernetes.io/version: v2.6.1
+    helm.sh/chart: aws-load-balancer-controller-1.6.1
+    prometheus.io/service-monitor: "false"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:meta.helm.sh/release-name: {}
+          f:meta.helm.sh/release-namespace: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/version: {}
+          f:helm.sh/chart: {}
+          f:prometheus.io/service-monitor: {}
+      f:spec:
+        f:internalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":443,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: terraform-provider-helm_v2.11.0_x5.exe
+    operation: Update
+    time: "2023-10-12T08:27:11Z"
+  name: aws-load-balancer-webhook-service
+  namespace: kube-system
+  resourceVersion: "777"
+  uid: 772577fd-bc91-47a8-8bed-609f5b09c6f3
+spec:
+  clusterIP: 172.20.190.244
+  clusterIPs:
+  - 172.20.190.244
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: webhook-server
+    port: 443
+    protocol: TCP
+    targetPort: webhook-server
+  selector:
+    app.kubernetes.io/instance: aws-load-balancer-controller
+    app.kubernetes.io/name: aws-load-balancer-controller
+  sessionAffinity: None
+  type: ClusterIP
