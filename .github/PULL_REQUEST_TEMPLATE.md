@@ -15,8 +15,8 @@
 
 ### Additional Changes
 
-- [ ] This PR modifies the API contract
-- [ ] This PR modifies the database schema
+- [ ] This PR modifies the interfaces
+- [ ] This PR requires changes in upstream service as changes are not backward compatible
 - [ ] This PR modifies application configuration/environment variables
 
 <!--
