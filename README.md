@@ -3,19 +3,17 @@
 Card Auth Server Extensions is an open-source repository providing extension modules to enhance the functionality of the Card Auth Server (ACS), 
 a 3D Secure Access Control Server designed to add an extra layer of security to online credit and debit card transactions. 
 These extensions facilitate integration with various systems, offering additional features and security measures.
-
-## Overview
-The 3D Secure protocol, utilized by major credit card companies like Visa, Mastercard, and American Express, 
-aims to combat card-not-present (CNP) fraud by introducing an additional layer of security. 
-The Access Control Server (ACS) is a vital component enabling issuing banks to participate in Verified by Visa, 
-MasterCard SecureCode, JCB J/Secure, and American Express Safekey 3D Secure programs. 
-Card Auth Server Extensions extends the capabilities of ACS, making it more adaptable and feature-rich for seamless integration with diverse systems in the banking and fintech sectors.
-
+For more detailed explaination and feature [visit here](https://github.com/freedom-finance-stack/card-auth-server).
 
 ### 1. Crypto Package
 
-The `crypto` package includes encryption-related classes:
+The `crypto` package provides a comprehensive set of interfaces and implementations related to encryption. It encompasses various cryptographic algorithms and functionalities, allowing developers to secure sensitive data through encryption and related techniques. This package is often used in software development to ensure the confidentiality and integrity of information, providing a robust foundation for cryptographic operations in applications.
 
+There are following Interfaces:
+- **IEncryption:**
+  - The IEncryption interface outlines a contract for encryption and decryption operations within a software system. It likely includes method signatures such as encrypt and decrypt, providing a standardized interface for incorporating different encryption algorithms. Implementing classes or modules can adhere to this interface, promoting a consistent and interchangeable approach to data security within the application architecture.
+
+There are pre-existing implementations of the above interface
 - **AES256Encryption:**
     - Implementation of the IEncryption interface for AES-256 encryption.
     - Provides methods for encrypting and decrypting data.
@@ -23,61 +21,62 @@ The `crypto` package includes encryption-related classes:
 - **AES256EncryptionConfig:**
     - Configuration class for AES-256 encryption.
     - Stores password and salt values required for encryption.
-
-- **EncryptionException:**
-    - RuntimeException thrown for encryption-related errors.
-
-- **IEncryption:**
-    - Interface defining methods for encryption and decryption.
+  
 
 - **NoOpEncryption:**
     - Implementation of IEncryption that performs no encryption or decryption.
+>Feel free to customize them as per your requirements and don't forget to put it in the application.yml file for the application to determine appropriate config for Encryption.
 
 ### 2. External Libs Package
 
-The `externalibs` package includes classes related to external libraries:
+The `externalLibs` package contains essential components designed to enhance the functionality and security of the open-source project. These libraries are integral to the system's core operations, offering features like request interception configuration and seamless integration with security modules.
 
 - **RequestInterceptorConfig:**
-    - Intercepts HTTP requests and processes them.
-    - Checks for the presence of SecurityModuleAWS and verifies requests.
+  - The `RequestInterceptorConfig` class plays a crucial role in the project's request processing workflow. It serves as a customizable entry point that is invoked before any request is processed. This class allows developers to configure and call custom modules as specified in the properties file. By offering a versatile method, RequestInterceptorConfig accommodates diverse use cases for custom modules, providing the flexibility to tailor request processing based on specific project requirements. Developers can modify this function to seamlessly integrate and execute custom logic as needed.
 
-### 3. Security Package
 
-The `security` package includes a class related to security functionality for AWS:
+- **SecurityModuleAWS Class** 
+   - The `SecurityModuleAWS` class is a fundamental component within the ExternalLibs package, focused on bolstering the security aspects of the project. This module is specifically designed for seamless integration with Amazon Web Services (AWS) security features. It facilitates robust security implementations, ensuring the confidentiality and integrity of sensitive data. Developers can leverage the capabilities of SecurityModuleAWS to enhance the overall security posture of the project, especially in scenarios where AWS services play a vital role.
+  
 
-- **SecurityModuleAWS:**
-    - Component in a Spring Boot application providing security functionality for AWS.
-    - Conditionally enabled based on the value of the external-libs.security.SecurityModuleAWS.enabled property.
-
-### 4. HSM Package
+### 3. HSM Package
 
 The `hsm` package contains classes related to Hardware Security Module (HSM) functionality.
+  1. **command**: The `command` package includes classes related to handling commands.
+    - **HSMCommandType** :
+       - The `HSMCommandType` enum encapsulates various types of commands for Hardware Security Modules (HSMs). 
+       This enumeration serves as a comprehensive set of predefined values, representing distinct HSM command types. 
+       Its primary functionalities include not only defining and organizing these command types but also providing a mechanism to convert a string representation of a command type into its corresponding enum value, enhancing flexibility and ease of use in HSM-related operations.
+     - **HSMCommandFactory**
+       - The HSMCommandFactory interface, within the HSM package, defines a contract for creating instances of HSMCommand. It declares a method, getHSMCommand, responsible for instantiating specific HSMCommand implementations based on the provided HSMCommandType. This factory design pattern allows for a flexible and extensible approach to constructing HSM commands, promoting modularity and ease of maintenance within the HSM package.
+     - **HSMCommandModule**
+       - The `HSMCommandModule` class in the HSM package serves as a configuration class with the primary role of orchestrating the creation of beans related to Hardware Security Module (HSM) command functionality in a Spring application. This class, through code analysis, undertakes the task of scanning a specified package for components to be included in the application context. It defines two essential beans: hsmCommandFactory, implemented as a ServiceLocatorFactoryBean adhering to the HSMCommandFactory interface, and hsmCommandTypeEnabled, which retrieves the enabled HSM gateway from application properties and converts it into the corresponding HSMCommandType enum value. These defined beans play a pivotal role in configuring and enhancing the HSM-related functionalities within the Spring application.
+     - **HSMCommand**
+       - The abstract class HSMCommand in the HSM module defines a template for interacting with Hardware Security Modules (HSMs). It includes methods for initializing, serializing, sending requests, and processing responses. The class encapsulates common functionality for HSM communication and introduces a template method, processHSMMessage, orchestrating the sequence of actions required to handle an HSM message, promoting modularity and ease of extension for concrete implementations.
+  2. **cvv** 
+   - The cvv package serves as an example implementation for Card Verification Value (CVV) generation using a Hardware Security Module (HSM). The CVVFacade interface defines a method for generating CVV values from an HSM message. The accompanying CVVFacadeImpl class demonstrates the process of validating the input HSM message, utilizing the appropriate HSM command, and returning the generated CVV. Users have the flexibility to create their implementations and update the application.yml configuration file to seamlessly integrate their custom CVV generation logic into the application. This modular structure encourages user customization and adaptability to specific requirements.
+  3. **Luna** 
 
-### 5. Command Package
+- **config** 
+  - The `config` package within the Luna subpackage of the HSM module is integral to configuring and initializing communication with a Luna Hardware Security Module (HSM). It includes two key classes, HSMGatewayConfig and HSMInitialisationConfig, responsible for establishing the HSM gateway. HSMGatewayConfig sets up essential components such as the client connection factory, sending message handler, and receiving channel adapter. On the other hand, HSMInitialisationConfig configures channels, handlers, and messaging gateways for sending and receiving messages to and from the Luna HSM, demonstrating a comprehensive approach to HSM initialization and communication setup.
+- **gateway**
+  - 
+- **message**
+  - 
+- **utils**
+  - 
+- **LunaEE0802HSMCommandImpl**
+  - The `LunaEE0802HSMCommandImpl` class, an implementation of the `HSMCommand` abstract class within the Luna subpackage, specializes in sending requests to a Luna Hardware Security Module (HSM) and handling responses, particularly for the generation of Card Verification Value (CVV) codes. Key functionalities include initializing the HSM command, serializing it with modified CVV index and padded data, sending the request to the Luna HSM via HSMGatewayService, fetching and processing the response, and updating the HSM message accordingly. It's worth noting that this is a general implementation, providing users with the flexibility to customize it as needed and incorporate it into the application configuration (`application.yml`).
 
-The `command` package includes classes related to handling commands.
-
-### 6. CVV Package
-
-The `cvv` package contains classes related to Card Verification Value (CVV) processing.
-
-### 7. Exception Package
-
-The `exception` package includes generic exception classes.
-
-### 8. Luna Package
-
-The `luna` package includes classes related to Luna hardware security module functionality.
-
-### 9. Message Package
+### 8. Message Package
 
 The `message` package contains classes related to message processing.
 
-### 10. NoOp Package
+### 9. NoOp Package
 
 The `noop` package includes classes that perform no operations.
 
-### 11. Notification Package
+### 10. Notification Package
 
 The `notification` package includes classes related to notification services:
 
@@ -99,7 +98,7 @@ The `notification` package includes classes related to notification services:
 - **Interfaces:**
     - Interface definitions for notification services.
 
-### 12. Scheduled Task Package
+### 11. Scheduled Task Package
 
 The `scheduled-task` package includes classes related to scheduled tasks:
 
@@ -112,7 +111,7 @@ The `scheduled-task` package includes classes related to scheduled tasks:
 - **TaskSchedularWrapper:**
     - Wrapper class for task scheduling.
 
-### 13. State Machine Package
+### 12. State Machine Package
 
 The `state-machine` package includes classes related to state machines:
 
@@ -128,7 +127,7 @@ The `state-machine` package includes classes related to state machines:
 - **StateMachineEntity:**
     - Interface for entities in state machines.
 
-### 14. Timer Package
+### 13. Timer Package
 
 The `timer` package includes classes related to timers:
 
@@ -138,11 +137,11 @@ The `timer` package includes classes related to timers:
 - **TimerService:**
     - Interface defining timer-related methods.
 
-### 15. Util Package
+### 14. Util Package
 
 The `util` package includes utility classes.
 
-### 16. Validation Package
+### 15. Validation Package
 
 The `validation` package includes classes related to validation:
 
