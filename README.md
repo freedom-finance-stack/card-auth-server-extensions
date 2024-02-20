@@ -93,29 +93,27 @@ The `notification` package serves as the central hub for a comprehensive notific
 
 ### 11. Scheduled Task Package
 
-The `scheduled-task` package includes classes related to scheduled tasks:
-
+The `scheduled-task` package serves as a comprehensive module for managing scheduled tasks within an application. It encapsulates configuration classes (`Config` package) for fine-tuning task scheduler properties, exception handling (`Exception` package) for task-related errors, and a versatile `TaskSchedulerWrapper` class for scheduling and canceling tasks using a custom `ScheduledExecutorService`. Users can seamlessly integrate and extend these components, providing a flexible and customizable framework for handling scheduled tasks, with configurations conveniently adjusted in the `application.yml` file.
 - **Config:**
-    - Configuration classes for scheduled tasks.
+    - The `Config` package within scheduled-task includes the `TaskSchedulerConfig` class, a configuration class for the task scheduler. It allows users to define properties such as core pool size, max pool size, and keep alive time. Users can customize these configurations in `application.yml` to suit their specific scheduling needs.
 
 - **Exception:**
-    - Exception classes related to scheduled tasks.
+    - The `Exception` package contains the `TaskAlreadyExistException` class, an exception thrown when attempting to create a task with an ID that already exists. This class serves to indicate that a task with the same ID is already present. Users can handle such exceptions in their scheduled task implementations and configure error handling in `application.yml`.
 
 - **TaskSchedularWrapper:**
-    - Wrapper class for task scheduling.
+    - The `TaskSchedulerWrapper` class in the `TaskSchedularWrapper` package serves as a wrapper managing scheduled tasks with a custom `ScheduledExecutorService`. It offers functionalities for scheduling and canceling tasks based on unique IDs. Users can extend or replace this class with custom implementations to meet specific requirements, with configurations conveniently managed in `application.yml`.
 
 ### 12. State Machine Package
 
-The `state-machine` package includes classes related to state machines:
-
+The `state-machine` package constitutes a cohesive module for implementing and managing state machines within an application. It encompasses essential components such as a custom exception class (`InvalidStateTransactionException`) for handling invalid state transitions, a generic `State` interface for defining states and transitions, the `StateMachine` class providing methods for triggering transitions, and the `StateMachineEntity` interface serving as a foundation for state machine entities. Users can seamlessly integrate, extend, and configure these components according to their specific state machine requirements, with customization options conveniently available in the `application.yml` file.
 - **InvalidStateTransactionException:**
-    - Exception class for invalid state transactions.
+    -  The `InvalidStateTransactionException` class, a custom exception that extends the base `Exception` class. It is designed to handle exceptions arising from invalid state transitions within a state machine. Users can handle these exceptions and configure error codes/messages in `application.yml`.
 
 - **State:**
-    - Interface defining states for state machines.
+    - the `StateMachine` class, which provides a static method named `Trigger` for initiating state transitions in a state machine entity. This class acts as a facilitator for triggering and managing transitions. Users can incorporate their custom logic for state transitions and update configurations in `application.yml`.
 
 - **StateMachine:**
-    - Class representing a state machine.
+    - the `StateMachineEntity` interface, defining methods for retrieving the entity name, setting the state, and getting the current state. This interface serves as the foundation for entities within a state machine. Users can implement this interface to create custom state machine entities and configure their behavior in `application.yml`.
 
 - **StateMachineEntity:**
     - Interface for entities in state machines.
@@ -128,21 +126,25 @@ The `timer` package includes classes related to timers:
     - Implementation of the TimerService interface using ScheduledExecutorService.
 
 - **TimerService:**
-    - Interface defining timer-related methods.
+    - The `StateMachineEntity` interface, defining methods for retrieving the entity name, setting the state, and getting the current state. This interface serves as the foundation for entities within a state machine. Users can implement this interface to create custom state machine entities and configure their behavior in `application.yml`.
 
 ### 14. Util Package
 
-The `util` package includes utility classes.
+The `Util` package hosts the Util class, featuring utility methods for common operations, including retrieving the current timestamp and checking if an object is null or has a blank string representation. Users can integrate these versatile utility functions into their applications, with the flexibility to customize and configure operations in the `application.yml` file.
+
 
 ### 15. Validation Package
 
-The `validation` package includes classes related to validation:
+the `Validation` package offers a robust set of tools for handling and customizing validation operations within an application, with configurations conveniently managed in the `application.yml` file.
 
 - **Enum:**
-    - Enumerations related to validation.
+    - Defines the DataLengthType enum, distinguishing between fixed and variable data lengths.
 
 - **Exception:**
-    - Exception classes related to validation.
+    - Contains the `ValidationException` class, a custom exception for handling validation errors, offering error code and field name information. Users can customize error handling and configure error codes/messages in `application.yml`.
 
 - **Validator:**
-    - Validation utility classes.
+    - Includes various validator classes such as `IsIP`, `IsNumeric`, `IsUUID`, `IsValidObject`, `NotBlank`, and `NotEmpty`. These validators cover IP address, numeric, UUID, object validity, non-blank, and non-empty validations, providing a flexible framework. Users can extend these validators and configure validations in `application.yml`.
+
+- **Rule:**
+    - Introduces the `Validatable` and `Validator` interfaces, allowing users to define custom validation rules. The `Validation` class provides a mechanism for applying multiple validation rules to a value, logging errors, and rethrowing a consolidated exception. Users can implement their validation logic and update configurations in `application.yml`.
