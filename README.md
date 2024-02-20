@@ -75,25 +75,21 @@ The `hsm` package contains classes related to Hardware Security Module (HSM) fun
 
 ### 10. Notification Package
 
-The `notification` package includes classes related to notification services:
-
+The `notification` package serves as the central hub for a comprehensive notification system, housing packages such as `DTO`, `Enums`, `Exceptions`, `Factory`, and `Impl`. It provides a modular and extensible framework for handling email and SMS notifications, offering structured DTOs, customizable enums, exception handling, and factory classes. Users can tailor the notification system by extending and customizing these components, with configurations managed conveniently in `application.yml`.
 - **DTO:**
-    - Data Transfer Objects for notifications.
+    - The `DTO` package includes classes representing Data Transfer Objects for notifications. Notable classes are `EmailNotificationDto` and `SMSNotificationDto`, providing structured representations for email and SMS notifications, respectively. Users can contribute custom implementations by extending the abstract NotificationDto class and adjusting configurations in `application.yml`.
 
 - **Enums:**
-    - Enumeration types related to notifications.
+    - The `Enums` package introduces enumeration types related to notifications. Classes like `EmailChannelType` and `SMSChannelType` define different channels, allowing users to categorize and customize notification types. The package facilitates extensibility by providing a method to retrieve enum instances based on specified parameters.
 
 - **Exceptions:**
-    - Custom exceptions for notification services.
-
+    - The `Exceptions` package houses custom exception classes for notification services, such as `NotificationErrorCode` and `NotificationException`. `NotificationErrorCode` defines error codes with default messages, while NotificationException represents exceptions specific to notifications. Users can handle custom exceptions and configure error codes in `application.yml`.
 - **Factory:**
-    - Factory classes for creating notification services.
+    - The `Factory` package contains factory classes responsible for creating instances of notification services. For example, `EmailNotificationFactory` creates an instance of `EmailNotificationService` based on the configuration. Users can extend or replace these factory implementations to tailor notification services by updating configurations in `application.yml`.
 
 - **Impl:**
-    - Implementation classes for notification services.
+    - The `Impl` package provides interfaces and their implementations for notification services. `EmailNotificationService` and `SMSNotificationService` define common functionalities for email and SMS services, respectively. Users can create their implementations by extending these interfaces and configuring them in `application.yml`.
 
-- **Interfaces:**
-    - Interface definitions for notification services.
 
 ### 11. Scheduled Task Package
 
