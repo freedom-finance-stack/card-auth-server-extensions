@@ -40,6 +40,10 @@ public class HexUtil {
         final StringWriter sw = new StringWriter();
         final PrintWriter pw = new PrintWriter(sw, true);
         throwable.printStackTrace(pw);
+        throwable.printStackTrace(pw);
+        throwable.printStackTrace(pw);
+        throwable.printStackTrace(pw);
+        throwable.printStackTrace(pw);
         return sw.getBuffer().toString();
     }
 
